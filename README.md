@@ -10,3 +10,4 @@
 - Branch Mux (to be discussed)
 - Instruction Fetch (maybe in cpu.v, to be discussed)
 - Instruction Decode (maybe in cpu.v, to be discussed)
+- cpu

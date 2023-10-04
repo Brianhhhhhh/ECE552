@@ -1,13 +1,12 @@
-module CLA_16bit(a, b, sub, sum, ppp, ggg);
+module CLA_16bit(a, b, sub, sum, ppp, ggg, ovfl);
 input [15:0] a,b;
 input sub;
 output [15:0] sum;
-output ppp, ggg;
+output ppp, ggg, ovfl;
 
 wire [3:1] c;
 wire [15:0] bPrime, sumRaw;
 wire [3:0] G, P;
-wire ovfl;
 
 assign bPrime = (sub) ? ~b	: b;
 

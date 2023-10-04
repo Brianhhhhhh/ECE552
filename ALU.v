@@ -6,6 +6,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     
     wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out;
     wire ppp, ggg; // for CLA_16bit, to be discussed
+    wire ovfl;
     reg Flag_Z; // set when output == 0;
     reg Flag_V; // set when output overflow, add and sub only
     reg Flag_N; // set when output < 0, add and sub only
@@ -13,7 +14,9 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     wire Mode; 
     assign Mode = (ALUOp[0] == 1'b1) ? 1'b1 : 1'b0;  
 
-    CLA_16bit adder(.a(In1), .b(In2), .sub(Mode), .sum(add_out), .ppp(ppp), .ggg(ggg));
+    CLA_16bit adder(.a(In1), .b(In2), .sub(Mode), .sum(add_out), .ppp(ppp), .ggg(ggg),.ovfl(ovfl));
+
+
     XOR xor(.a(In1), .b(In2), .out(xor_out));
     PADDSB paddsb(.a(In1), .b(In2), .sum(paddsb_out));
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
@@ -27,7 +30,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 ALU_Out = add_out;
                 Flag_N = add_out[15];
                 Flag_Z = add_out == 16'h0000 ? 1'b1 : 1'b0; 
-                // Flag_V to be discussed
+                Flag_V = ovfl;
             end
             4'b0010: begin
                 ALU_Out = xor_out;
@@ -54,7 +57,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
             end
             default: begin
-                ALU_Out = 0;
+                ALU_Out = 16'h0000;
             end
         endcase
     end

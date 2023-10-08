@@ -21,7 +21,7 @@ module control_ALUOp(opCode, ALUOp);
 			// PADDSB
 			4'b0111: ALUOp = 4'b0111;	
 			// LW, SW
-			4'b100x: ALUOp = 4'b0000;	// do add in ALU
+			4'b100x: ALUOp = 4'b1010;	// do add in ALU
 			// LLB
 			4'b1010: ALUOp = 4'b1000;	// do concatenation in ALU?
 			// LHB

@@ -4,7 +4,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     output reg [15:0] ALU_Out;
     output reg [2:0] Flag; 
     
-    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out;
+    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out;
     wire ppp, ggg; // for CLA_16bit, to be discussed
     wire ovfl;
     reg Flag_Z; // set when output == 0;
@@ -13,10 +13,12 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
 
     wire Mode; 
     assign Mode = (ALUOp[0] == 1'b1) ? 1'b1 : 1'b0;  
+    wire [15:0] ls_input1 = In1 & 16'hFFFE;
+    wire [15:0] ls_input2 = In2 << 1; 
 
     CLA_16bit adder(.a(In1), .b(In2), .sub(Mode), .sum(add_out), .ppp(ppp), .ggg(ggg),.ovfl(ovfl));
 
-
+    CLA_16bit lb_adder(.a(ls_input1), .b(ls_input2),.sub(0'b0), .sum(ls_out), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
     XOR xor(.a(In1), .b(In2), .out(xor_out));
     PADDSB paddsb(.a(In1), .b(In2), .sum(paddsb_out));
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
@@ -27,6 +29,12 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     always @(*) begin
         case(ALUOp)
             4'b0000: begin
+                ALU_Out = add_out;
+                Flag_N = add_out[15];
+                Flag_Z = add_out == 16'h0000 ? 1'b1 : 1'b0; 
+                Flag_V = ovfl;
+            end
+            4'0001: begin
                 ALU_Out = add_out;
                 Flag_N = add_out[15];
                 Flag_Z = add_out == 16'h0000 ? 1'b1 : 1'b0; 
@@ -52,6 +60,17 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 ALU_Out = ror_out;
                 Flag_Z = ror_out == 16'h0000 ? 1'b1 : 1'b0;  
             end
+            // LLB
+            4'b1000: begin
+                ALU_Out = lb_out;
+                Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
+            end
+            // LHB
+            4'b1001: begin
+                ALU_Out = lb_out;
+                Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
+            end
+            // lw, sw
             4'b1010: begin
                 ALU_Out = lb_out;
                 Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  

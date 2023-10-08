@@ -4,8 +4,8 @@
 
 ### Modules Needed
 
-- ALU (lw sw opcode to do)
-- Flag Register (to be discussed) DONE
+- ALU DONE
+- Flag Register  DONE
 - Data Memory (whl working on)
 - Branch Mux (to be discussed)
 - Instruction Fetch , hz working on

@@ -63,17 +63,14 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
             // LLB
             4'b1000: begin
                 ALU_Out = lb_out;
-                Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
             end
             // LHB
             4'b1001: begin
                 ALU_Out = lb_out;
-                Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
             end
             // lw, sw
             4'b1010: begin
                 ALU_Out = lb_out;
-                Flag_Z = lb_out == 16'h0000 ? 1'b1 : 1'b0;  
             end
             default: begin
                 ALU_Out = 16'h0000;

@@ -4,10 +4,10 @@
 
 ### Modules Needed
 
-- ALU (whl working on)
-- Flag Register (to be discussed)
-- Data Memory
+- ALU (lw sw opcode to do)
+- Flag Register (to be discussed) DONE
+- Data Memory (whl working on)
 - Branch Mux (to be discussed)
-- Instruction Fetch (maybe in cpu.v, to be discussed)
-- Instruction Decode (maybe in cpu.v, to be discussed)
-- cpu
+- Instruction Fetch , hz working on
+- Instruction Decode , tzq working on
+- cpu (to be discussed)

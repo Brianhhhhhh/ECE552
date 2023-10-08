@@ -2,7 +2,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     input [15:0] In1, In2;
     input [3:0] ALUOp;
     output reg [15:0] ALU_Out;
-    output wire [2:0] Flag; 
+    output reg [2:0] Flag; 
     
     wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out;
     wire ppp, ggg; // for CLA_16bit, to be discussed
@@ -60,7 +60,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 ALU_Out = 16'h0000;
             end
         endcase
+        Flag = {Flag_Z, Flag_V, Flag_N};
     end
 
-    assign Flag = {Flag_Z, Flag_V, Flag_N};
 endmodule

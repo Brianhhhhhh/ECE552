@@ -33,7 +33,7 @@ module decode(clk, rst, instruction, writeData, ALUOp, Branch, BranchReg, MemRea
 	readReg2_mux iReadReg2Mux (.Opcode(Opcode), .tempo(tempoRt), .rd(Rd), .rt(Rt));
 	
 	// determine immediate
-	signExtend iSignExtend (.instruction(instruction), .sign_extended(immediate));
+	Sign_extend iSignExtend (.instruction(instruction), .sign_extended(immediate));
 	
 	// determine control signals
 	wire write;

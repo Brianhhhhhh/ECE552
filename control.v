@@ -137,7 +137,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					end
 			// BR
 			4'b1101: begin
-					Branch = 1'b0;
+					Branch = 1'b1;
 					BranchReg = 1'b1;
 					MemRead = 1'b0;
 					MemtoReg = 1'b0;

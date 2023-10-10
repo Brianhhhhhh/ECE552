@@ -11,15 +11,15 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     reg Flag_V; // set when output overflow, add and sub only
     reg Flag_N; // set when output < 0, add and sub only
 
-    wire Mode; 
+    wire Mode;
     assign Mode = (ALUOp[0] == 1'b1) ? 1'b1 : 1'b0;  
     wire [15:0] ls_input1 = In1 & 16'hFFFE;
     wire [15:0] ls_input2 = In2 << 1; 
 
     CLA_16bit adder(.a(In1), .b(In2), .sub(Mode), .sum(add_out), .ppp(ppp), .ggg(ggg),.ovfl(ovfl));
 
-    CLA_16bit lb_adder(.a(ls_input1), .b(ls_input2),.sub(0'b0), .sum(ls_out), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
-    XOR xor(.a(In1), .b(In2), .out(xor_out));
+    CLA_16bit lb_adder(.a(ls_input1), .b(ls_input2),.sub(1'b0), .sum(ls_out), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+    XOR i_xor(.out(xor_out), .a(In1), .b(In2) );
     PADDSB paddsb(.a(In1), .b(In2), .sum(paddsb_out));
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
     SLL sll(.Shift_Out(sll_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
@@ -34,7 +34,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 Flag_Z = add_out == 16'h0000 ? 1'b1 : 1'b0; 
                 Flag_V = ovfl;
             end
-            4'0001: begin
+            4'b0001: begin
                 ALU_Out = add_out;
                 Flag_N = add_out[15];
                 Flag_Z = add_out == 16'h0000 ? 1'b1 : 1'b0; 

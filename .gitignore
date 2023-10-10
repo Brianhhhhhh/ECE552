@@ -1,3 +1,7 @@
 work
 *.mti
 *.mpf
+output
+.vscode/tasks.json
+tb.v
+.gitignore

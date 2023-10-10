@@ -19,15 +19,18 @@ module decode(clk, rst, instruction, writeData, ALUOp, Branch, BranchReg, MemRea
 	output [2:0] BranchCCC;
 	inout [15:0] readData1, readData2;
 	
-	wire [3:0] Opcode, Rd, Rt, tempo, Rs;
+	wire [3:0] Opcode, Rd, Rt, tempoRs, tempoRt, Rs;
 	assign Opcode = instruction[15:12];
 	assign Rd = instruction[11:8];
-	assign Rt = instruction[3:0];
-	assign tempo = instruction[7:4];	
+	assign tempoRt = instruction[3:0];
+	assign tempoRs = instruction[7:4];
 	assign BranchCCC = instruction[11:9];
 	
 	// determine Rs
-	readReg1_mux iReadRegMux (.Opcode(Opcode), .tempo(tempo), .rd(Rd), .rs(Rs));
+	readReg1_mux iReadReg1Mux (.Opcode(Opcode), .tempo(tempoRs), .rd(Rd), .rs(Rs));
+	
+	// determine Rt
+	readReg2_mux iReadReg2Mux (.Opcode(Opcode), .tempo(tempoRt), .rd(Rd), .rt(Rt));
 	
 	// determine immediate
 	signExtend iSignExtend (.instruction(instruction), .sign_extended(immediate));

@@ -1,4 +1,4 @@
-module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, ALUSrc, RegWrite, HALT, PCS, readReg);
+module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, ALUSrc, RegWrite, HALT, PCS, readReg, SW);
 	input [3:0] opCode;
 	output [3:0] ALUOp;
 	output reg Branch;
@@ -11,6 +11,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 	output reg HALT;
 	output reg PCS;
 	output reg readReg;
+	output reg SW;
 	
 	// determine ALUOp for ALU part
 	control_ALUOp iALUOp (.opCode(opCode), .ALUOp(ALUOp));
@@ -30,6 +31,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// SLL
 			4'b0100: begin
@@ -43,6 +45,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// SRA
 			4'b0101: begin
@@ -56,6 +59,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// ROR
 			4'b0110: begin
@@ -69,6 +73,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// PADDSB
 			4'b0111: begin
@@ -82,6 +87,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// LW
 			4'b1000: begin
@@ -95,6 +101,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// SW
 			4'b1001: begin
@@ -108,6 +115,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b1;
 					end
 			// LLB, LHB
 			4'b101x: begin
@@ -121,6 +129,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b1;
+					SW = 1'b0;
 					end
 			// B
 			4'b1100: begin
@@ -134,6 +143,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// BR
 			4'b1101: begin
@@ -147,6 +157,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// PCS
 			4'b1110: begin
@@ -160,6 +171,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b1;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			// HALT
 			4'b1111: begin
@@ -173,6 +185,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b1;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 			default: begin
 					Branch = 1'b0;
@@ -185,6 +198,7 @@ module control (opCode, ALUOp, Branch, BranchReg, MemRead, MemtoReg, MemWrite, A
 					HALT = 1'b0;
 					PCS = 1'b0;
 					readReg = 1'b0;
+					SW = 1'b0;
 					end
 		endcase
 	end

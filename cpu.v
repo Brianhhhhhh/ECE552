@@ -71,9 +71,9 @@ module cpu(clk, rst_n, hlt, pc);
 	wire [15:0] pcplus2;
 	wire [15:0] targetaddr;
 	// pcplus2 = curAddr + 2;
-	CLA_16bit branchadder1(.a(16'h0002), .b(curAddr), .sum(pcplus2), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+	CLA_16bit branchadder1(.a(16'h0002), .b(curAddr), .sum(pcplus2), .sub(1'b0), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
 	// targetaddr  = pcplus2 + immdiate << 1;
-	CLA_16bit branchadder2(.a(pcplus2), .b(immediate << 1), .sum(targetaddr), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+	// CLA_16bit branchadder2(.a(pcplus2), .b(immediate << 1), .sum(targetaddr), .sub(1'b0), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
 
 	assign newAddr = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2;
 	

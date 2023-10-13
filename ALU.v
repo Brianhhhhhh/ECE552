@@ -5,8 +5,8 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     output reg [2:0] Flag; 
     
     wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out;
-    wire ppp, ggg; // for CLA_16bit, to be discussed
-    wire ovfl;
+    wire ppp, ggg, ovfl; // for CLA_16bit, to be discussed
+    wire pp, gg, ov;
     reg Flag_Z; // set when output == 0;
     reg Flag_V; // set when output overflow, add and sub only
     reg Flag_N; // set when output < 0, add and sub only
@@ -18,7 +18,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
 
     CLA_16bit adder(.a(In1), .b(In2), .sub(Mode), .sum(add_out), .ppp(ppp), .ggg(ggg),.ovfl(ovfl));
 
-    CLA_16bit lb_adder(.a(ls_input1), .b(ls_input2),.sub(1'b0), .sum(ls_out), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+    CLA_16bit lb_adder(.a(ls_input1), .b(ls_input2),.sub(1'b0), .sum(ls_out), .ppp(pp), .ggg(gg), .ovfl(ov));
     XOR i_xor(.out(xor_out), .a(In1), .b(In2) );
     PADDSB paddsb(.a(In1), .b(In2), .sum(paddsb_out));
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  

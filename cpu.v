@@ -34,6 +34,11 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// wires in MUX
 	wire [15:0] writeData;
+
+	// wire in flag_register
+	wire [2:0] flag_out;
+
+	wire BranchFinal;
 	
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
@@ -49,6 +54,10 @@ module cpu(clk, rst_n, hlt, pc);
 	// ALU
 	assign In2 = ALUSrc ? immediate : readData2; // ALUSrc mux
 	ALU iALU(.ALU_Out(ALU_Out), .In1(readData1), .In2(In2), .ALUOp(ALUOp), .Flag(Flag));
+
+	// flag register
+	flag_register iflag_register(.clk(clk),.rst(~rst_n),.flag_in(Flag),.flag_out(flag_out));
+
 	
 	// data memory
 	memory1c datMemory(.data_out(dataMem), .data_in(readData2), .addr(ALU_Out), .enable(MemRead), .wr(MemWrite), .clk(clk), .rst(~rst_n));
@@ -56,10 +65,17 @@ module cpu(clk, rst_n, hlt, pc);
 	// MUX selecting ALU_Out, dataMem, newAddr of PC to be written into register	newAddr???
 	assign writeData = MemtoReg ? dataMem : PCS ? newAddr : ALU_Out;
 	
-	// newAddr, Branch ???
-	// BR: readData1
-	// target: current PC + 2 + immediate << 1
-	// normal: current PC + 2
+	
+	BranchMux  iBranchMux(.branch(Branch), .ccc(BranchCCC), .Flag(flag_out), .branch_out(BranchFinal));
+	wire ppp, ggg, ovfl;
+	wire [15:0] pcplus2;
+	wire [15:0] targetaddr;
+	// pcplus2 = curAddr + 2;
+	CLA_16bit branchadder1(.a(16'h0002), .b(curAddr), .sum(pcplus2), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+	// targetaddr  = pcplus2 + immdiate << 1;
+	CLA_16bit branchadder2(.a(pcplus2), .b(immediate << 1), .sum(targetaddr), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
+
+	assign newAddr = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2;
 	
 	assign hlt = HALT;
 	assign pc = curAddr;

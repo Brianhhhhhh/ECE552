@@ -57,7 +57,9 @@ module cpu(clk, rst_n, hlt, pc);
 	assign writeData = MemtoReg ? dataMem : PCS ? newAddr : ALU_Out;
 	
 	// newAddr, Branch ???
-	
+	// BR: readData1
+	// target: current PC + 2 + immediate << 1
+	// normal: current PC + 2
 	
 	assign hlt = HALT;
 	assign pc = curAddr;

@@ -4,7 +4,7 @@ input [3:0] Rot_Val; // Rot amount (used to shift the input data)
 output reg [15:0] Rot_Out; // Roted output data
 
 reg [5:0] amt;
-reg [15:0] out_int;
+reg [15:0] out_int, out_int2;
 
 
 always @(*) begin 
@@ -29,6 +29,8 @@ always @(*) begin
 		default : amt = 6'hxx;
 	endcase
 	
+	//assign out_int = Rot_In;
+	
 	case(amt[1:0])
 		2'b00	: out_int = Rot_In;
 		2'b01	: out_int = {Rot_In[15],Rot_In[15:1]};
@@ -37,18 +39,18 @@ always @(*) begin
 	endcase
 	
 	case(amt[3:2])
-		2'b00	: out_int = out_int;
-		2'b01	: out_int = {Rot_In[2:0],Rot_In[15:3]};
-		2'b10	: out_int = {Rot_In[5:0],Rot_In[15:6]};
-		default	: out_int = 16'hxxxx;
+		2'b00	: out_int2 = out_int;
+		2'b01	: out_int2 = {out_int[2:0],out_int[15:3]};
+		2'b10	: out_int2 = {out_int[5:0],out_int[15:6]};
+		default	: out_int2 = 16'hxxxx;
 	endcase
 	
 	case(amt[5:4])
-		2'b00	: out_int = out_int;
-		2'b01	: out_int = {Rot_In[8:0],Rot_In[15:9]};
-		default	: out_int = 16'hxxxx;
+		2'b00	: Rot_Out = out_int2;
+		2'b01	: Rot_Out = {out_int2[8:0],out_int2[15:9]};
+		default	: Rot_Out = 16'hxxxx;
 	endcase
 	
-	Rot_Out = out_int;
+	//Rot_Out = out_int;
 end 
 endmodule

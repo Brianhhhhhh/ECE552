@@ -46,7 +46,7 @@ module cpu(clk, rst_n, hlt, pc);
 	PCRegister iPCReg(.clk(clk), .rst(~rst_n), .wen(~HALT), .newAddr(newAddr), .curAddr(curAddr));
 	
 	// instruction memory	data_in???
-	memory1c insMemory(.data_out(instruction), .data_in(16'h0000), .addr(curAddr), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(~rst_n));
+	memory_ins insMemory(.data_out(instruction), .data_in(16'h0000), .addr(curAddr), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(~rst_n));
 	
 	// decode
 	decode idecode(.clk(clk), .rst(~rst_n), .instruction(instruction), .writeData(writeData), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .HALT(HALT), .PCS(PCS), .immediate(immediate), .BranchCCC(BranchCCC), .readData1(readData1), .readData2(readData2));
@@ -60,7 +60,7 @@ module cpu(clk, rst_n, hlt, pc);
 
 	
 	// data memory
-	memory1c datMemory(.data_out(dataMem), .data_in(readData2), .addr(ALU_Out), .enable(MemRead), .wr(MemWrite), .clk(clk), .rst(~rst_n));
+	memory_data datMemory(.data_out(dataMem), .data_in(readData2), .addr(ALU_Out), .enable(MemRead), .wr(MemWrite), .clk(clk), .rst(~rst_n));
 	
 	// MUX selecting ALU_Out, dataMem, newAddr of PC to be written into register	newAddr???
 	assign writeData = MemtoReg ? dataMem : PCS ? newAddr : ALU_Out;

@@ -1,0 +1,673 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/altera/16.0
+vALU
+Z0 !s110 1697238050
+!i10b 1
+!s100 Y::aB`]aod@29?l6>Mzb=0
+Ill`QOUg6H@in[fiCCENM21
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/Tzq17/Desktop/552_P1/ECE552
+w1697234815
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v
+L0 1
+Z3 OV;L;10.4d;61
+r1
+!s85 0
+31
+Z4 !s108 1697238050.000000
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v|
+!i113 1
+Z5 o-work work
+n@a@l@u
+vBitCell
+R0
+!i10b 1
+!s100 f68JYWNmfI^4zB?1E^<@O3
+IZI<Tn@zE@EHV7DYl5Hg2]2
+R1
+R2
+w1696732662
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/BitCell.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/BitCell.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/BitCell.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/BitCell.v|
+!i113 1
+R5
+n@bit@cell
+vBranchMux
+R0
+!i10b 1
+!s100 5MfmIRc1c2kjj0aOhcCa^3
+IZ6mn2@eaD1hPYUR[fWj9e1
+R1
+R2
+w1696897994
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/BranchMux.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/BranchMux.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/BranchMux.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/BranchMux.v|
+!i113 1
+R5
+n@branch@mux
+vCLA_16bit
+R0
+!i10b 1
+!s100 kZ5]f4LoQaYVLCWQRHU_93
+IS<QYi2LE`zdhe`kARJS4N3
+R1
+R2
+Z6 w1696822305
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v|
+!i113 1
+R5
+n@c@l@a_16bit
+vCLA_4bit
+R0
+!i10b 1
+!s100 A7b_3EC5J6glgAl9b7K9;0
+II8IdLlNYc`d<`0egT3PBd0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_4bit.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_4bit.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_4bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_4bit.v|
+!i113 1
+R5
+n@c@l@a_4bit
+vCLA_logic
+R0
+!i10b 1
+!s100 8>az1[Ao]`L7a:JT0Qf]R2
+IzL`BD>FZ[zU_;[D1A6CK32
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v|
+!i113 1
+R5
+n@c@l@a_logic
+vcontrol
+R0
+!i10b 1
+!s100 iU6TZ0VPlgIHA8IgeA[i32
+ICW>A_=RWi;ZjA]Xg=e<7;3
+R1
+R2
+w1696993771
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/control.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v|
+!i113 1
+R5
+vcontrol_ALUOp
+R0
+!i10b 1
+!s100 73a:UJ1;oQ5W79RG^l@c11
+I3ciV6gljF=Pa5FREz>S9F0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v|
+!i113 1
+R5
+ncontrol_@a@l@u@op
+vcpu
+R0
+!i10b 1
+!s100 UG:?2A]>=95[RazQh47>[1
+I?Xlaz;Y=56b_HeE_`]Kn40
+R1
+R2
+w1697233641
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v|
+!i113 1
+R5
+vcpu_tb
+R0
+!i10b 1
+!s100 9@2EIhW7TzNDGW;@::eWA2
+I0G;MHF@kKBF@ROHXo2mgR1
+R1
+R2
+w1697230278
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v|
+!i113 1
+R5
+vdecode
+R0
+!i10b 1
+!s100 =bfMO<?Z85JYVKjZPjEm]1
+I@6>l;XFobP`S7MVK:FLa92
+R1
+R2
+w1696993349
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/decode.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/decode.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/decode.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/decode.v|
+!i113 1
+R5
+vdff
+R0
+!i10b 1
+!s100 PV_CoVVQ]?nI;J@mj=Gn=3
+IEDOcCcm:Kb0R^6M[zS^LT2
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v|
+!i113 1
+R5
+vflag_register
+R0
+!i10b 1
+!s100 DH=9I?UJ2kdYO7`gj2M[E3
+IFT;nn3Md46O6Bk@@I^a:F1
+R1
+R2
+w1697234848
+8C:\Users\Tzq17\Desktop\552_P1\ECE552\FlagRegister.v
+FC:\Users\Tzq17\Desktop\552_P1\ECE552\FlagRegister.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:\Users\Tzq17\Desktop\552_P1\ECE552\FlagRegister.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Tzq17\Desktop\552_P1\ECE552\FlagRegister.v|
+!i113 1
+R5
+vLB
+R0
+!i10b 1
+!s100 UQYAlamSQNF_h<9L0]SJ92
+I@jeMS;XC9o^`7a;E@0Wn^0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/LB.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/LB.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/LB.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/LB.v|
+!i113 1
+R5
+n@l@b
+vmemory1c
+!s110 1697038201
+!i10b 1
+!s100 z?Z580:J9UO?2@dWG^`m53
+IE9kk?aBd0@NnZE2Kln_A03
+R1
+R2
+w1695579507
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v
+Z7 L0 31
+R3
+r1
+!s85 0
+31
+!s108 1697038201.000000
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v|
+!i113 1
+R5
+vmemory_data
+R0
+!i10b 1
+!s100 i_b]4f[aY;Bb[56ojnZ^80
+I^7>G5QJ:U0oDWHN6g[`U^3
+R1
+R2
+w1697237560
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v
+R7
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v|
+!i113 1
+R5
+vmemory_ins
+R0
+!i10b 1
+!s100 <_No2gh46hRlP]WbeV[dK2
+I8F0fF3K5VS?;W=E0B:bI50
+R1
+R2
+w1697237933
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v
+R7
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v|
+!i113 1
+R5
+vPADDSB
+R0
+!i10b 1
+!s100 <197feOnPL?m6m<Wa0`7D0
+ISTm12Q]>=KS3a8lHO1gSj3
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v|
+!i113 1
+R5
+n@p@a@d@d@s@b
+vPCRegister
+R0
+!i10b 1
+!s100 ][i2l^n]VUk`U9@g6YRW:1
+I:_cYl;Ti30Z<aK`Q>8ZI12
+R1
+R2
+w1696905335
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v|
+!i113 1
+R5
+n@p@c@register
+vPFA_1bit
+R0
+!i10b 1
+!s100 =mAPGmBLOdEWK8MfP43e`2
+IVcRYhW`@YgNGG;n8l7]9N0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/PFA_1bit.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/PFA_1bit.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/PFA_1bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/PFA_1bit.v|
+!i113 1
+R5
+n@p@f@a_1bit
+vReadDecoder_4_16
+Z8 !s110 1697238051
+!i10b 1
+!s100 _HBeQNb>b?WF5]M1_h5T00
+IaOCn:SQ]0YVBP5cc;BP701
+R1
+R2
+w1696478512
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v|
+!i113 1
+R5
+n@read@decoder_4_16
+vreadReg1_mux
+!s110 1696906890
+!i10b 1
+!s100 O0S3HnZ3?B8=KKlkISh=f1
+I4O5eHFflj?3YnO1eWbP5@0
+R1
+R2
+w1696900020
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg1_mux.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/readReg1_mux.v
+L0 1
+R3
+r1
+!s85 0
+31
+Z9 !s108 1696906890.000000
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg1_mux.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg1_mux.v|
+!i113 1
+R5
+nread@reg1_mux
+vreadReg2_mux
+!s110 1696906891
+!i10b 1
+!s100 2QR2kG9C[d]iaNE`;1;bR0
+I4K=Bfbij4>jT]T1b@?90Y1
+R1
+R2
+w1696900090
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg2_mux.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/readReg2_mux.v
+L0 1
+R3
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg2_mux.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/readReg2_mux.v|
+!i113 1
+R5
+nread@reg2_mux
+vRED
+R8
+!i10b 1
+!s100 N4eN_XTz5cniU7S[=gjP33
+I^XljglLSW6d1@mIJ0K`Rk2
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/RED.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/RED.v
+L0 1
+R3
+r1
+!s85 0
+31
+Z10 !s108 1697238051.000000
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/RED.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/RED.v|
+!i113 1
+R5
+n@r@e@d
+vRegister
+R8
+!i10b 1
+!s100 cdT>QkFjGCjm[bW?CER@81
+I>6naK^BQTc89c_T<k`iN?0
+R1
+R2
+w1696481944
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/Register.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/Register.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/Register.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/Register.v|
+!i113 1
+R5
+n@register
+vRegisterFile
+R8
+!i10b 1
+!s100 XGXo;54L>gM>aZZSmOOoM0
+Iz2GkQ2G_QJMf>Ql:EEG:<2
+R1
+R2
+w1696788945
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/RegisterFile.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/RegisterFile.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/RegisterFile.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/RegisterFile.v|
+!i113 1
+R5
+n@register@file
+vROR
+R8
+!i10b 1
+!s100 =PXUM^2BL]KXiM<o]R7;L2
+IUh1K@Tm:=APlDcFS78:WV3
+R1
+R2
+w1697237172
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/ROR.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/ROR.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/ROR.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/ROR.v|
+!i113 1
+R5
+n@r@o@r
+vSign_extend
+R8
+!i10b 1
+!s100 GHOZL5PNU^lK_2Efizoc52
+I9AK]o67lLI2?P504@Pmdc0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v|
+!i113 1
+R5
+n@sign_extend
+vSLL
+R8
+!i10b 1
+!s100 _mRYRY:loTj8>K<h<ohVP0
+IOdY64J_e>9[zNW4[N2WbP0
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v|
+!i113 1
+R5
+n@s@l@l
+vSRA
+R8
+!i10b 1
+!s100 L]56X4Jz8QaS2;8_bb2@T2
+IMHVY2R=dmc]@UJmz^Yh9i3
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v|
+!i113 1
+R5
+n@s@r@a
+vWriteDecoder_4_16
+R8
+!i10b 1
+!s100 cQ@o_mC>n4F_Mi99ni?N?0
+IU7E0WezZbg8K013><VnbT2
+R1
+R2
+w1696478824
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v
+L0 1
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v|
+!i113 1
+R5
+n@write@decoder_4_16
+vXOR
+R0
+!i10b 1
+!s100 [Ab@VERDH^hQ]nib?6BDJ3
+IYZ2MU^02]JI4j5R;:[2=^3
+R1
+R2
+R6
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v|
+!i113 1
+R5
+n@x@o@r

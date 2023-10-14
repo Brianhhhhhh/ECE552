@@ -4,7 +4,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     output reg [15:0] ALU_Out;
     output reg [2:0] Flag; 
     
-    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out;
+    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out, red_out;
     wire ppp, ggg, ovfl; // for CLA_16bit, to be discussed
     wire pp, gg, ov;
     reg Flag_Z; // set when output == 0;
@@ -24,6 +24,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
     SLL sll(.Shift_Out(sll_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
     ROR ror(.Rot_In(In1), .Rot_Val(In2[3:0]), .Rot_Out(ror_out));
+	RED red(.a(In1), .b(In2), .sum(red_out));
     LB lb(.Reg_Val(In1), .Imm(In2[7:0]), .Mode(Mode), .Sum(lb_out)); // Mode: 0 for LLB, 1 for LHB
     
     always @(*) begin
@@ -70,7 +71,11 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
             end
             // lw, sw
             4'b1010: begin
-                ALU_Out = lb_out;
+                ALU_Out = ls_out;
+            end
+			// red
+			4'b0011: begin
+                ALU_Out = red_out;
             end
             default: begin
                 ALU_Out = 16'h0000;

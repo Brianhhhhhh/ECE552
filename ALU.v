@@ -4,9 +4,9 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     output reg [15:0] ALU_Out;
     output reg [2:0] Flag; 
     
-    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out, red_out;
-    wire ppp, ggg, ovfl; // for CLA_16bit, to be discussed
-    wire pp, gg, ov;
+    wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out;
+    wire ppp, ggg; // for CLA_16bit, to be discussed
+    wire ovfl;
     reg Flag_Z; // set when output == 0;
     reg Flag_V; // set when output overflow, add and sub only
     reg Flag_N; // set when output < 0, add and sub only

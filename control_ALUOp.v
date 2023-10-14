@@ -26,7 +26,7 @@ module control_ALUOp(opCode, ALUOp);
 			4'b1010: ALUOp = 4'b1000;	// do concatenation in ALU?
 			// LHB
 			4'b1011: ALUOp = 4'b1001;	// do concatenation in ALU?
-			default: ALUOp = 4'b0000;
+			default: ALUOp = 4'b1100;
 		endcase
 	end
 endmodule

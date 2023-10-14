@@ -2,7 +2,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     input [15:0] In1, In2;
     input [3:0] ALUOp;
     output reg [15:0] ALU_Out;
-    output reg [2:0] Flag; 
+    output wire [2:0] Flag; 
     
     wire [15:0] add_out, xor_out, paddsb_out, sra_out, sll_out, ror_out, lb_out, ls_out, red_out;
     wire ppp, ggg, ovfl; // for CLA_16bit, to be discussed
@@ -26,8 +26,8 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     ROR ror(.Rot_In(In1), .Rot_Val(In2[3:0]), .Rot_Out(ror_out));
 	RED red(.a(In1), .b(In2), .sum(red_out));
     LB lb(.Reg_Val(In1), .Imm(In2[7:0]), .Mode(Mode), .Sum(lb_out)); // Mode: 0 for LLB, 1 for LHB
-    
-    always @(*) begin
+    	
+    always @(ALUOp) begin
         case(ALUOp)
             4'b0000: begin
                 ALU_Out = add_out;
@@ -81,7 +81,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
                 ALU_Out = 16'h0000;
             end
         endcase
-        Flag = {Flag_Z, Flag_V, Flag_N};
     end
+	assign Flag = {Flag_Z, Flag_V, Flag_N};
 
 endmodule

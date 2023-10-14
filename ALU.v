@@ -24,7 +24,7 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
     SRA sra(.Shift_Out(sra_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
     SLL sll(.Shift_Out(sll_out), .Shift_Val(In2[3:0]), .Shift_In(In1));  
     ROR ror(.Rot_In(In1), .Rot_Val(In2[3:0]), .Rot_Out(ror_out));
-    RED red(.a(In1), .b(In2) , .sum(red_out));
+	RED red(.a(In1), .b(In2), .sum(red_out));
     LB lb(.Reg_Val(In1), .Imm(In2[7:0]), .Mode(Mode), .Sum(lb_out)); // Mode: 0 for LLB, 1 for LHB
     
     always @(*) begin
@@ -73,7 +73,8 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
             4'b1010: begin
                 ALU_Out = ls_out;
             end
-            4'b0011: begin
+			// red
+			4'b0011: begin
                 ALU_Out = red_out;
             end
             default: begin

@@ -53,12 +53,11 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// ALU
 	assign In2 = ALUSrc ? immediate : readData2; // ALUSrc mux
-	ALU iALU(.ALU_Out(ALU_Out), .In1(readData1), .In2(In2), .ALUOp(ALUOp), .Flag(Flag));
+	ALU iALU(.ALU_Out(ALU_Out), .In1(readData1), .In2(In2), .ALUOp(ALUOp), .Flag(Flag), .Flagin(flag_out));
 
 	// flag register
 	flag_register iflag_register(.clk(clk),.rst(~rst_n),.flag_in(Flag),.flag_out(flag_out));
 
-	
 	// data memory
 	assign enable = MemRead | MemWrite;
 	memory_data datMemory(.data_out(dataMem), .data_in(readData2), .addr(ALU_Out), .enable(enable), .wr(MemWrite), .clk(clk), .rst(~rst_n));

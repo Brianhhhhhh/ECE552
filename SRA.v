@@ -4,8 +4,7 @@ input [3:0] Shift_Val; // Shift amount (used to shift the input data)
 output reg [15:0] Shift_Out; // Shifted output data
 
 reg [5:0] amt;
-reg [15:0] out_int;
-
+reg [15:0] out_int, out_int2;
 
 always @(*) begin 
 
@@ -37,18 +36,17 @@ always @(*) begin
 	endcase
 	
 	case(amt[3:2])
-		2'b00	: out_int = out_int;
-		2'b01	: out_int = {{3{Shift_In[15]}},Shift_In[15:3]};
-		2'b10	: out_int = {{6{Shift_In[15]}},Shift_In[15:6]};
-		default	: out_int = 16'hxxxx;
+		2'b00	: out_int2 = out_int;
+		2'b01	: out_int2 = {{3{out_int[15]}},out_int[15:3]};
+		2'b10	: out_int2 = {{6{out_int[15]}},out_int[15:6]};
+		default	: out_int2 = 16'hxxxx;
 	endcase
 	
 	case(amt[5:4])
-		2'b00	: out_int = out_int;
-		2'b01	: out_int = {{9{Shift_In[15]}},Shift_In[15:9]};
-		default	: out_int = 16'hxxxx;
+		2'b00	: Shift_Out = out_int2;
+		2'b01	: Shift_Out = {{9{out_int2[15]}},out_int2[15:9]};
+		default	: Shift_Out = 16'hxxxx;
 	endcase
 	
-	Shift_Out = out_int;
 end 
 endmodule

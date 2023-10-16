@@ -12,19 +12,19 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	Register
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module CLA_16bit
-
-Top level modules:
-	CLA_16bit
-
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_logic.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module CLA_logic
 
 Top level modules:
 	CLA_logic
+
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/CLA_16bit.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module CLA_16bit
+
+Top level modules:
+	CLA_16bit
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -47,7 +47,7 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	LB
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/FlagRegister.v {1 {vlog -work work -stats=none {C:\Users\Tzq17\Desktop\552_P1\ECE552\FlagRegister.v}
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/FlagRegister.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/FlagRegister.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module flag_register
 
@@ -61,13 +61,6 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	cpu
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module PCRegister
-
-Top level modules:
-	PCRegister
-
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module Sign_extend
@@ -75,12 +68,12 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	Sign_extend
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/PCRegister.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module memory_data
+-- Compiling module PCRegister
 
 Top level modules:
-	memory_data
+	PCRegister
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -88,6 +81,13 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 
 Top level modules:
 	WriteDecoder_4_16
+
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_data.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module memory_data
+
+Top level modules:
+	memory_data
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/D-Flip-Flop.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -110,19 +110,19 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	cpu_tb
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module ReadDecoder_4_16
-
-Top level modules:
-	ReadDecoder_4_16
-
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module SLL
 
 Top level modules:
 	SLL
+
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/ReadDecoder_4_16.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module ReadDecoder_4_16
+
+Top level modules:
+	ReadDecoder_4_16
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/PADDSB.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -152,12 +152,12 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	control_ALUOp
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module XOR
+-- Compiling module control
 
 Top level modules:
-	XOR
+	control
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/memory.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -166,12 +166,12 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	memory1c
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v
+} {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/XOR.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module control
+-- Compiling module XOR
 
 Top level modules:
-	control
+	XOR
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015

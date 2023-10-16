@@ -1,6 +1,7 @@
-module ALU(ALU_Out, In1, In2, ALUOp, Flag);
+module ALU(ALU_Out, In1, In2, ALUOp, Flag, Flagin);
     input [15:0] In1, In2;
     input [3:0] ALUOp;
+	input [2:0] Flagin;
     output reg [15:0] ALU_Out;
     output wire [2:0] Flag; 
     
@@ -27,7 +28,10 @@ module ALU(ALU_Out, In1, In2, ALUOp, Flag);
 	RED red(.a(In1), .b(In2), .sum(red_out));
     LB lb(.Reg_Val(In1), .Imm(In2[7:0]), .Mode(Mode), .Sum(lb_out)); // Mode: 0 for LLB, 1 for LHB
     	
-    always @(ALUOp) begin
+    always @(ALUOp, In1, In2, sra_out, add_out, xor_out, paddsb_out, sll_out, ror_out, lb_out, ls_out, red_out, Flagin) begin
+		Flag_N = Flagin[0];
+		Flag_Z = Flagin[2];
+		Flag_V = Flagin[1];
         case(ALUOp)
             4'b0000: begin
                 ALU_Out = add_out;

@@ -153,7 +153,7 @@ module cpu_tb();
    // Edit the example below. You must change the signal
    // names on the right hand side
     
-//   assign PC = DUT.fetch0.pcCurrent; //You won't need this because it's part of the main cpu interface
+   //   assign PC = DUT.fetch0.pcCurrent; //You won't need this because it's part of the main cpu interface
    assign Inst = DUT.insMemory.data_out;
    
    assign RegWrite = DUT.idecode.iControl.RegWrite;
@@ -177,7 +177,7 @@ module cpu_tb();
    assign MemData = DUT.idecode.readData2;
    // Data to be written to memory for memory writes (16 bits)
    
-//   assign Halt = DUT.memory0.halt; //You won't need this because it's part of the main cpu interface
+   //   assign Halt = DUT.memory0.halt; //You won't need this because it's part of the main cpu interface
    // Is processor halted (1 bit signal)
    
    /* Add anything else you want here */

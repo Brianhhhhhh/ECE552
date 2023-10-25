@@ -4,13 +4,17 @@ module cpu(clk, rst_n, hlt, pc);
 	output hlt;
 	output [15:0] pc;
 	
-	// wires in PC register
+	// wires in PC Register
 	wire [15:0] newAddr, curAddr;	// new address and current address of PC
 	
-	// wires in instruction memory
+	// wires in Instruction Memory
 	wire [15:0] instruction;
 	
-	// wires in decode
+	// wires in Decode
+	wire readReg; 					// signal indicating LLB & LHB
+	wire SW;	  					// signal indicating SW
+	wire writeToReg;
+	wire [3:0] Opcode, Rd, Rt, Rs, tempoRs, tempoRt;
 	wire [3:0] ALUOp;
 	wire Branch;
 	wire BranchReg;
@@ -32,24 +36,47 @@ module cpu(clk, rst_n, hlt, pc);
 	// wires in data memory
 	wire [15:0] dataMem;
 	wire enable;
+	
 	// wires in MUX
 	wire [15:0] writeData;
 
 	// wire in flag_register
 	wire [2:0] flag_out;
-
+	
+	// wire in branch
 	wire BranchFinal;
 	
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	// PC register
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+	
+	
+	// PC Register
 	PCRegister iPCReg(.clk(clk), .rst(~rst_n), .wen(~HALT), .newAddr(newAddr), .curAddr(curAddr));
 	
-	// instruction memory	data_in???
+	// Instruction Memory
 	memory_ins insMemory(.data_out(instruction), .data_in(16'h0000), .addr(curAddr), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(~rst_n));
 	
-	// decode
-	decode idecode(.clk(clk), .rst(~rst_n), .instruction(instruction), .writeData(writeData), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .HALT(HALT), .PCS(PCS), .immediate(immediate), .BranchCCC(BranchCCC), .readData1(readData1), .readData2(readData2));
+	// Decode
+	assign Opcode = instruction[15:12];
+	assign Rd = instruction[11:8];
+	assign tempoRt = instruction[3:0];
+	assign tempoRs = instruction[7:4];
+	assign BranchCCC = instruction[11:9];
+	
+	// Rs
+	assign Rs = (readReg) ? Rd : tempoRs;
+	
+	// Rt
+	assign Rt = (SW) ? Rd : tempoRt;
+	
+	// immediate
+	Sign_extend iSignExtend (.instruction(instruction), .sign_extended(immediate));
+	
+	// control signals
+	control iControl(.opCode(Opcode), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .RegWrite(writeToReg), .HALT(HALT), .PCS(PCS), .readReg(readReg), .SW(SW));
+	
+	// readData1 & readData2 from the register file
+	RegisterFile iRegisterFile(.clk(clk), .rst(~rst_n), .SrcReg1(Rs), .SrcReg2(Rt), .DstReg(Rd), .WriteReg(writeToReg), .DstData(writeData), .SrcData1(readData1), .SrcData2(readData2));
 	
 	// ALU
 	assign In2 = ALUSrc ? immediate : readData2; // ALUSrc mux
@@ -62,10 +89,10 @@ module cpu(clk, rst_n, hlt, pc);
 	assign enable = MemRead | MemWrite;
 	memory_data datMemory(.data_out(dataMem), .data_in(readData2), .addr(ALU_Out), .enable(enable), .wr(MemWrite), .clk(clk), .rst(~rst_n));
 	
-	// MUX selecting ALU_Out, dataMem, newAddr of PC to be written into register	newAddr???
+	// MUX selecting ALU_Out, dataMem, newAddr of PC to be written into register
 	assign writeData = MemtoReg ? dataMem : PCS ? newAddr : ALU_Out;
 	
-	
+	// Branch
 	BranchMux  iBranchMux(.branch(Branch), .ccc(BranchCCC), .Flag(flag_out), .branch_out(BranchFinal));
 	wire ppp, ggg, ovfl;
 	wire pp,gg,ov;
@@ -75,7 +102,8 @@ module cpu(clk, rst_n, hlt, pc);
 	CLA_16bit branchadder1(.a(16'h0002), .b(curAddr), .sum(pcplus2), .sub(1'b0), .ppp(ppp), .ggg(ggg), .ovfl(ovfl));
 	// targetaddr  = pcplus2 + immdiate << 1;
 	CLA_16bit branchadder2(.a(pcplus2), .b(immediate << 1), .sum(targetaddr), .sub(1'b0), .ppp(pp), .ggg(gg), .ovfl(ov));
-
+	
+	// New address of PC
 	assign newAddr = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2;
 	
 	assign hlt = HALT;

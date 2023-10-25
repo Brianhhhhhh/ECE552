@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/altera/16.0
 vALU
-Z0 !s110 1697430327
+Z0 !s110 1697563076
 !i10b 1
 !s100 d?54`E7KElmJX8IN<P1O]3
 IdFz8LR8F]b_<mHhUQIgmP2
@@ -23,7 +23,7 @@ Z3 OV;L;10.4d;61
 r1
 !s85 0
 31
-Z4 !s108 1697430327.000000
+Z4 !s108 1697563076.000000
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/ALU.v|
 !i113 1
@@ -114,7 +114,7 @@ R4
 R5
 n@c@l@a_4bit
 vCLA_logic
-R0
+Z7 !s110 1697563077
 !i10b 1
 !s100 8>az1[Ao]`L7a:JT0Qf]R2
 IzL`BD>FZ[zU_;[D1A6CK32
@@ -135,7 +135,7 @@ R4
 R5
 n@c@l@a_logic
 vcontrol
-R0
+R7
 !i10b 1
 !s100 iU6TZ0VPlgIHA8IgeA[i32
 ICW>A_=RWi;ZjA]Xg=e<7;3
@@ -149,13 +149,13 @@ R3
 r1
 !s85 0
 31
-R4
+Z8 !s108 1697563077.000000
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/control.v|
 !i113 1
 R5
 vcontrol_ALUOp
-Z7 !s110 1697430328
+R7
 !i10b 1
 !s100 kN9P<@Mag_J2U:XI>S]=h0
 IL18h?jHHX70mazZkP;2Tk2
@@ -169,7 +169,7 @@ R3
 r1
 !s85 0
 31
-R4
+R8
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/control_ALUOp.v|
 !i113 1
@@ -190,7 +190,7 @@ R3
 r1
 !s85 0
 31
-Z8 !s108 1697430328.000000
+R8
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/cpu.v|
 !i113 1
@@ -198,11 +198,11 @@ R5
 vcpu_tb
 R7
 !i10b 1
-!s100 9@2EIhW7TzNDGW;@::eWA2
-I0G;MHF@kKBF@ROHXo2mgR1
+!s100 GV3?khG_Go=icVh@?YS=T0
+Ii38[L`IQbN7cV528KUeOY1
 R1
 R2
-w1697418846
+w1697493221
 8C:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v
 FC:/Users/Tzq17/Desktop/552_P1/ECE552/project-phase1-testbench.v
 L0 1
@@ -340,20 +340,20 @@ vmemory_ins
 R7
 !i10b 1
 !s100 iN^E5T`7?PS>EQ?<3Hm1N1
-I8<ZYzO55b]kBgNT^9C[LA0
+IZZY?BbCf^zLi4D<4z6Lam1
 R1
 R2
-w1697430323
-8C:\Users\Tzq17\Desktop\552_P1\ECE552\memory_ins.v
-FC:\Users\Tzq17\Desktop\552_P1\ECE552\memory_ins.v
+w1697493227
+8C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v
+FC:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v
 R9
 R3
 r1
 !s85 0
 31
 R8
-!s107 C:\Users\Tzq17\Desktop\552_P1\ECE552\memory_ins.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Tzq17\Desktop\552_P1\ECE552\memory_ins.v|
+!s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/memory_ins.v|
 !i113 1
 R5
 vPADDSB
@@ -546,7 +546,7 @@ R8
 R5
 n@register@file
 vROR
-R7
+Z11 !s110 1697563078
 !i10b 1
 !s100 jiX^CGEDZ^:MX:QZ=7d3c2
 ID==I<?din7HQK4M=m2?iP0
@@ -567,7 +567,7 @@ R8
 R5
 n@r@o@r
 vSign_extend
-R7
+R11
 !i10b 1
 !s100 GHOZL5PNU^lK_2Efizoc52
 I9AK]o67lLI2?P504@Pmdc0
@@ -581,14 +581,14 @@ R3
 r1
 !s85 0
 31
-R8
+Z12 !s108 1697563078.000000
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/Sign_extend.v|
 !i113 1
 R5
 n@sign_extend
 vSLL
-R7
+R11
 !i10b 1
 !s100 _mRYRY:loTj8>K<h<ohVP0
 IOdY64J_e>9[zNW4[N2WbP0
@@ -602,14 +602,14 @@ R3
 r1
 !s85 0
 31
-R8
+R12
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/SLL.v|
 !i113 1
 R5
 n@s@l@l
 vSRA
-R7
+R11
 !i10b 1
 !s100 ]3TKjeAU<T6ZC?L6N08RN0
 I9oo17h5SW4KaC9anV_4nV2
@@ -623,14 +623,14 @@ R3
 r1
 !s85 0
 31
-R8
+R12
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/SRA.v|
 !i113 1
 R5
 n@s@r@a
 vWriteDecoder_4_16
-!s110 1697430329
+R11
 !i10b 1
 !s100 cQ@o_mC>n4F_Mi99ni?N?0
 IU7E0WezZbg8K013><VnbT2
@@ -644,7 +644,7 @@ R3
 r1
 !s85 0
 31
-R8
+R12
 !s107 C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P1/ECE552/WriteDecoder_4_16.v|
 !i113 1

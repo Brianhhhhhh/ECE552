@@ -20,3 +20,6 @@ wire [15:0] immediate;				EX
 wire [2:0] BranchCCC;				ID
 wire [15:0] readData1, readData2;	EX
 writeToReg							W
+
+NOP for flush: LLB $0, 0x00		-> 1010 0000 0000 0000
+NOP for stall: clear all controls except ALUOP (1010) to avoid changing flag register

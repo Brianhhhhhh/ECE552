@@ -9,7 +9,7 @@ module RegisterFile(input clk, input rst, input [3:0] SrcReg1, input [3:0] SrcRe
 	WriteDecoder_4_16 iWriteDecoder (.RegId(DstReg), .WriteReg(WriteReg), .Wordline(writeWL));
 	
 	// 16 registers
-	Register reg0 (.clk(clk), .rst(rst), .D(16'h0000), .WriteReg(writeWL[0]), .ReadEnable1(readWL1[0]), .ReadEnable2(readWL2[0]), .Bitline1(bitlineR1), .Bitline2(bitlineR2));
+	Register reg0 (.clk(clk), .rst(rst), .D(DstData), .WriteReg(1'b0), .ReadEnable1(readWL1[0]), .ReadEnable2(readWL2[0]), .Bitline1(bitlineR1), .Bitline2(bitlineR2));
 	Register reg1 (.clk(clk), .rst(rst), .D(DstData), .WriteReg(writeWL[1]), .ReadEnable1(readWL1[1]), .ReadEnable2(readWL2[1]), .Bitline1(bitlineR1), .Bitline2(bitlineR2));
 	Register reg2 (.clk(clk), .rst(rst), .D(DstData), .WriteReg(writeWL[2]), .ReadEnable1(readWL1[2]), .ReadEnable2(readWL2[2]), .Bitline1(bitlineR1), .Bitline2(bitlineR2));
 	Register reg3 (.clk(clk), .rst(rst), .D(DstData), .WriteReg(writeWL[3]), .ReadEnable1(readWL1[3]), .ReadEnable2(readWL2[3]), .Bitline1(bitlineR1), .Bitline2(bitlineR2));

@@ -7,19 +7,8 @@ EX/MEM: ALU's reult, mem-write data, writeRegister(Rt/Rd), control signals, PC+2
 MEM/WB: dataout, ALU's result, writeRegister(Rt/Rd), PC+2(for PCS), control signals
 
 
-wire [3:0] ALUOp;					EX
-wire Branch;						ID
-wire BranchReg;						ID
-wire MemRead;						MEM
-wire MemtoReg;						W		
-wire MemWrite;						MEM
-wire ALUSrc;						EX
-wire HALT;							?
-wire PCS;							W
-wire [15:0] immediate;				EX
-wire [2:0] BranchCCC;				ID
-wire [15:0] readData1, readData2;	EX
-writeToReg							W
-
-NOP for flush: LLB $0, 0x00		-> 1010 0000 0000 0000
-NOP for stall: clear all controls except ALUOP (1010) to avoid changing flag register
+Note:
+1): NOP for flush: LLB $0, 0x00		-> 1010 0000 0000 0000
+2): NOP for stall: insert NOP (mux of instruction?) / clear control signals not ALUOp + Rd
+3): hlt asserted in the write back stage; Need to consider halt fetched in IF stage and branch is not taken. Thus assign pc_reg_hlt = (instr[15:12] == 4'hf && branchNotTaken); to hinder future instructions from being fetched.
+4):  Branch taken --> flush used as a selecting signal for NOP instruction and instruciton fetched

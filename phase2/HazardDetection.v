@@ -5,7 +5,7 @@ module HazardDetection(
     input [3:0] IF_ID_Rt,
     output PC_Write,
     output IF_ID_Write,
-    output set_ctrl_zero,
+    output set_ctrl_zero
 );
     wire temp;
     // 1 = stall

@@ -1,0 +1,25 @@
+IF/ID: instruction, PC+2
+
+ID/EX: control signals, data read from two registers, sign-extended immediate, RegisterRs, RegisterRt, PC+2
+
+EX/MEM: ALU's reult, mem-write data, writeRegister(Rt/Rd), control signals, PC+2
+
+MEM/WB: dataout, ALU's result, writeRegister(Rt/Rd), PC+2(for PCS), control signals
+
+
+wire [3:0] ALUOp;					EX
+wire Branch;						ID
+wire BranchReg;						ID
+wire MemRead;						MEM
+wire MemtoReg;						W		
+wire MemWrite;						MEM
+wire ALUSrc;						EX
+wire HALT;							?
+wire PCS;							W
+wire [15:0] immediate;				EX
+wire [2:0] BranchCCC;				ID
+wire [15:0] readData1, readData2;	EX
+writeToReg							W
+
+NOP for flush: LLB $0, 0x00		-> 1010 0000 0000 0000
+NOP for stall: clear all controls except ALUOP (1010) to avoid changing flag register

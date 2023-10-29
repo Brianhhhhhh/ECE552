@@ -3,7 +3,7 @@ module HazardDetection(
     input [3:0] ID_EX_Rt,
     input [3:0] IF_ID_Rs,
     input [3:0] IF_ID_Rt,
-	input IF_ID_MemWrite;
+	input IF_ID_MemWrite,
     output PC_Write,
     output IF_ID_Write,
     output set_ctrl_zero

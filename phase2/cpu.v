@@ -15,7 +15,6 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// wires in ID/EX, some of them in EX/MEM and MEM/WB
 	wire set_ctrl_zero, PC_Write, IF_ID_Write;
-	wire [15:0] instructionN;
 	wire [3:0] Opcode, Rd, Rt, Rs, tempoRs, tempoRt, Rs_D2EX, Rt_D2EX, Rt_EX2M, Rd_D2EX, Rd_EX2M, Rd_M2WB;
 	wire [2:0] BranchCCC;
 	wire readReg; 					// signal indicating LLB & LHB
@@ -36,6 +35,7 @@ module cpu(clk, rst_n, hlt, pc);
 	wire [15:0] readData1, readData2, readData1_D2EX, readData2_D2EX;
 	wire [15:0] immediate, immediate_D2EX;
 	wire [15:0] pcplus2_D2EX;
+	wire [11:0] control_line;
 	
 	// wires in EX/MEM, some of them in MEM/WB
 	wire XtoX_A, XtoX_B;
@@ -82,16 +82,14 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// Hazard detection unit
 	HazardDetection iHazardD(.ID_EX_MemRead(MemRead_D2EX), .ID_EX_Rt(Rt_D2EX), .IF_ID_Rs(Rs), .IF_ID_Rt(Rt), .IF_ID_MemWrite(MemWrite), .PC_Write(PC_Write), .IF_ID_Write(IF_ID_Write), .set_ctrl_zero(set_ctrl_zero));
-	
-	// Stall instruction
-	assign instructionN = (set_ctrl_zero) ? 16'hA000 : instruction_IF2D;					// LLB $0, 0x00 --> 1010 0000 0000 0000 	insert NOP   ???
+
 	
 	// Decode into control signals
-	assign Opcode = instructionN[15:12];
-	assign Rd = instructionN[11:8];
-	assign tempoRt = instructionN[3:0];
-	assign tempoRs = instructionN[7:4];
-	assign BranchCCC = instructionN[11:9];
+	assign Opcode = instruction_IF2D[15:12];
+	assign Rd = instruction_IF2D[11:8];
+	assign tempoRt = instruction_IF2D[3:0];
+	assign tempoRs = instruction_IF2D[7:4];
+	assign BranchCCC = instruction_IF2D[11:9];
 	assign Rs = (readReg) ? Rd : tempoRs;
 	assign Rt = (SW) ? Rd : tempoRt;
 	control iControl(.opCode(Opcode), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .RegWrite(writeToReg), .HALT(HALT), .PCS(PCS), .readReg(readReg), .SW(SW));
@@ -105,11 +103,12 @@ module cpu(clk, rst_n, hlt, pc);
 	RegisterFile iRegisterFile(.clk(clk), .rst(~rst_n), .SrcReg1(Rs), .SrcReg2(Rt), .DstReg(Rd_M2WB), .WriteReg(writeToReg_M2WB), .DstData(writeData), .SrcData1(readData1), .SrcData2(readData2));
 	
 	// Immediate
-	Sign_extend iSignExtend (.instruction(instructionN), .sign_extended(immediate));
+	Sign_extend iSignExtend (.instruction(instruction_IF2D), .sign_extended(immediate));
 	
+	assign control_line = (set_ctrl_zero)? 12'h8000	: {ALUOp,ALUSrc,MemRead,MemWrite,writeToReg,MemtoReg,PCS,HALT,1'b0};
 	// ID/EX Register
-	D2EX iD2EX(.ALUSrc(ALUSrc), .ALUOp(ALUOp), .readData1(readData1), .readData2(readData2), .Immediate(immediate), .Rs(Rs), .Rt(Rt), .MemRead(MemRead), .MemWrite(MemWrite), 
-				.RegWrite(writeToReg), .MemtoReg(MemtoReg), .PCS(PCS), .HALT(HALT), .clk(clk), .rst_n(~rst_n), .Rd(Rd), .PC_Inc(pcplus2_IF2D), .ALUSrc_Out(ALUSrc_D2EX), 
+	D2EX iD2EX(.ALUSrc(control_line[7]), .ALUOp(control_line[11:8]), .readData1(readData1), .readData2(readData2), .Immediate(immediate), .Rs(Rs), .Rt(Rt), .MemRead(control_line[6]), .MemWrite(control_line[5]), 
+				.RegWrite(control_line[4]), .MemtoReg(control_line[3]), .PCS(control_line[2]), .HALT(control_line[1]), .clk(clk), .rst_n(~rst_n), .Rd(Rd), .PC_Inc(pcplus2_IF2D), .ALUSrc_Out(ALUSrc_D2EX), 
 				.ALUOp_Out(ALUOp_D2EX), .readData1_Out(readData1_D2EX), .readData2_Out(readData2_D2EX), .Immediate_Out(immediate_D2EX), .Rs_Out(Rs_D2EX), .Rt_Out(Rt_D2EX), 
 				.MemRead_Out(MemRead_D2EX), .MemWrite_Out(MemWrite_D2EX), .RegWrite_Out(writeToReg_D2EX), .MemtoReg_Out(MemtoReg_D2EX), .PCS_Out(PCS_D2EX), .HALT_Out(HALT_D2EX), 
 				.Rd_Out(Rd_D2EX), .PC_Inc_Out(pcplus2_D2EX));

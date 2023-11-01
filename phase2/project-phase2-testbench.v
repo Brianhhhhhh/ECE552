@@ -27,7 +27,7 @@ module cpu_ptb();
 
      
 
-   cpu DUT(.clk(clk), .rst_n(rst_n), .pc_out(PC), .hlt(Halt)); /* Instantiate your processor */
+   cpu DUT(.clk(clk), .rst_n(rst_n), .pc(PC), .hlt(Halt)); /* Instantiate your processor */
    
 
 
@@ -114,7 +114,7 @@ module cpu_ptb();
          end
          if (Halt) begin
             $fdisplay(sim_log_file, "SIMLOG:: Processor halted\n");
-            $fdisplay(sim_log_file, "SIMLOG:: sim_cycles %d\n", DUT.c0.cycle_count);
+            $fdisplay(sim_log_file, "SIMLOG:: sim_cycles %d\n", cycle_count);
             $fdisplay(sim_log_file, "SIMLOG:: inst_count %d\n", inst_count);
 
             $fclose(trace_file);
@@ -138,10 +138,10 @@ module cpu_ptb();
    // Is processor halted (1 bit signal)
    
 
-   assign Inst = DUT.data_out;
+   assign Inst = DUT.insMemory.data_out;
    //Instruction fetched in the current cycle
    
-   assign RegWrite = DUT.RegWrite;
+   assign RegWrite = DUT.iControl.RegWrite;
    // Is register file being written to in this cycle, one bit signal (1 means yes, 0 means no)
   
    assign WriteRegister = DUT.Rd;
@@ -150,19 +150,19 @@ module cpu_ptb();
    assign WriteData = DUT.writeData;
    // If above is true, this should hold the Data being written to the register. (16 bits)
    
-   assign MemRead =  DUT.MemRead;
+   assign MemRead =  DUT.iControl.MemRead;
    // Is memory being read from, in this cycle. one bit signal (1 means yes, 0 means no)
    
-   assign MemWrite = DUT.MemWrite;
+   assign MemWrite = DUT.iControl.MemWrite;
    // Is memory being written to, in this cycle (1 bit signal)
    
-   assign MemAddress = DUT.ALU_Out_EX2M;
+   assign MemAddress = DUT.datMemory.addr;
    // If there's a memory access this cycle, this should hold the address to access memory with (for both reads and writes to memory, 16 bits)
    
-   assign MemDataIn = DUT.dataMemIn;
+   assign MemDataIn = DUT.datMemory.data_in;
    // If there's a memory write in this cycle, this is the Data being written to memory (16 bits)
    
-   assign MemDataOut = DUT.dataMemOut;
+   assign MemDataOut = DUT.datMemory.data_out;
    // If there's a memory read in this cycle, this is the data being read out of memory (16 bits)
 
 

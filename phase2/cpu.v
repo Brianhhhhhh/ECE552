@@ -50,6 +50,9 @@ module cpu(clk, rst_n, hlt, pc);
 	wire enable;
 	
 	// wires in WB
+	wire [15:0] writeData;
+	
+	
 	
 	// ++++++++++++++++++++++++++++++++++++++++ IF/ID ++++++++++++++++++++++++++++++++++++++++++++++
 	
@@ -60,7 +63,7 @@ module cpu(clk, rst_n, hlt, pc);
 	assign newAddr = (BranchFinal) ? newAddr_D2EX : pcplus2;
 
 	// PC Register
-	assign haltNotBranch = (instruction_Stall[15:12] == 4'b1111 & BranchFinal == 1'b0);		// halt is fetched but branch is not taken in decide stage, disable PC from fetching more instructions
+	assign haltNotBranch = (instruction_Stall[15:12] == 4'b1111 & BranchFinal == 1'b0);		// halt is fetched but branch is not taken in decide stage, disable PC to stop fetching more instructions
 	assign wen = ~(haltNotBranch | PC_Write);
 	PCRegister iPCReg(.clk(clk), .rst(~rst_n), .wen(wen), .newAddr(newAddr), .curAddr(curAddr));
 	
@@ -81,9 +84,9 @@ module cpu(clk, rst_n, hlt, pc);
 	HazardDetection iHazardD(.ID_EX_MemRead(MemRead_D2EX), .ID_EX_Rt(Rt_D2EX), .IF_ID_Rs(Rs), .IF_ID_Rt(Rt), .IF_ID_MemWrite(MemWrite), .PC_Write(PC_Write), .IF_ID_Write(IF_ID_Write), .set_ctrl_zero(set_ctrl_zero));
 	
 	// Stall instruction
-	assign instructionN = (set_ctrl_zero) ? 16'hA000 : instruction_IF2D;					// LLB $0, 0x00 --> 1010 0000 0000 0000 	insert NOP
+	assign instructionN = (set_ctrl_zero) ? 16'hA000 : instruction_IF2D;					// LLB $0, 0x00 --> 1010 0000 0000 0000 	insert NOP   ???
 	
-	// Decode
+	// Decode into control signals
 	assign Opcode = instructionN[15:12];
 	assign Rd = instructionN[11:8];
 	assign tempoRt = instructionN[3:0];
@@ -94,12 +97,12 @@ module cpu(clk, rst_n, hlt, pc);
 	control iControl(.opCode(Opcode), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .RegWrite(writeToReg), .HALT(HALT), .PCS(PCS), .readReg(readReg), .SW(SW));
 	
 	// New address of PC
-	CLA_16bit branchadder2(.a(pcplus2_IF2D), .b(immediate << 1), .sum(targetaddr), .sub(1'b0), .ppp(pp), .ggg(gg), .ovfl(ov)); 	// Target address of branch
+	CLA_16bit branchadder2(.a(pcplus2_IF2D), .b(immediate << 1), .sum(targetaddr), .sub(1'b0), .ppp(pp), .ggg(gg), .ovfl(ov)); 	// target address of branch
 	BranchMux iBranchMux(.branch(Branch), .ccc(BranchCCC), .Flag(flag_out), .branch_out(BranchFinal));
-	assign newAddr_D2EX = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2_IF2D;	// newAddr_D2EX will be passed to IF/ID
+	assign newAddr_D2EX = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2_IF2D;	// newAddr_D2EX will be passed to PC in IF/ID
 	
-	// Register file	$$$
-	RegisterFile iRegisterFile(.clk(clk), .rst(~rst_n), .SrcReg1(Rs), .SrcReg2(Rt), .DstReg(Rd), .WriteReg(???), .DstData(???), .SrcData1(readData1), .SrcData2(readData2));
+	// Register file
+	RegisterFile iRegisterFile(.clk(clk), .rst(~rst_n), .SrcReg1(Rs), .SrcReg2(Rt), .DstReg(Rd_M2WB), .WriteReg(writeToReg_M2WB), .DstData(writeData), .SrcData1(readData1), .SrcData2(readData2));
 	
 	// Immediate
 	Sign_extend iSignExtend (.instruction(instructionN), .sign_extended(immediate));
@@ -121,8 +124,8 @@ module cpu(clk, rst_n, hlt, pc);
 	Forwarding iForwarding(.EX_MEM_RegWrite(writeToReg_EX2M), .EX_MEM_WriteRegister(Rd_EX2M), .ID_EX_Rs(Rs_D2EX), .ID_EX_Rt(Rt_D2EX), .XtoX_A(XtoX_A), .XtoX_B(XtoX_B), .MEM_WB_RegWrite(writeToReg_M2WB), 
 						   .MEM_WB_WriteRegister(Rd_M2WB), .MtoX_A(MtoX_A), .MtoX_B(MtoX_B), .EX_MEM_MemWrite(MemWrite_EX2M), .EX_MEM_Rt(Rt_EX2M), .MtoM(MtoM));
 	
-	// Forwarding mux	$$$
-	Forwarding_mux iForwardMux(.XtoX_A(XtoX_A), .XtoX_B(XtoX_B), .MtoX_A(MtoX_A), .MtoX_B(MtoX_B), .ID_EX_Rs(readData1_D2EX), .ID_EX_Rt(readData2_D2EX), .EX_MEM_ALUOut(ALU_Out_EX2M), .MEM_WB_WriteData(), .ALUin1(ALUin1), 
+	// Forwarding mux
+	Forwarding_mux iForwardMux(.XtoX_A(XtoX_A), .XtoX_B(XtoX_B), .MtoX_A(MtoX_A), .MtoX_B(MtoX_B), .ID_EX_Rs(readData1_D2EX), .ID_EX_Rt(readData2_D2EX), .EX_MEM_ALUOut(ALU_Out_EX2M), .MEM_WB_WriteData(writeData), .ALUin1(ALUin1), 
 							   .ALUin2(ALUin2), .ALUSrc(ALUSrc_D2EX), .immediate(immediate_D2EX), .dataRt(dataRt));
 	
 	// ALU & Flag register
@@ -143,7 +146,7 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// Data memory
 	assign enable = MemRead_EX2M | MemWrite_EX2M;
-	assign dataMemIn = (MtoM) ? (???) : dataRt_EX2M;	// MEM to MEM mux
+	assign dataMemIn = (MtoM) ? writeData : dataRt_EX2M;	// MEM to MEM mux
 	memory_data datMemory(.data_out(dataMemOut), .data_in(dataMemIn), .addr(ALU_Out_EX2M), .enable(enable), .wr(MemWrite_EX2M), .clk(clk), .rst(~rst_n));
 	
 	// MEM/WB Register
@@ -152,15 +155,13 @@ module cpu(clk, rst_n, hlt, pc);
 			   .Rd_Out(Rd_M2WB), .PC_Inc_Out(pcplus2_M2WB));
 	
 	// ++++++++++++++++++++++++++++++++++++++++ MEM/WB ++++++++++++++++++++++++++++++++++++++++++++++
-
-	// wait to be finished
 	
-	// wires in MUX
-	wire [15:0] writeData;
+	
 	
 	// MUX selecting ALU_Out, dataMem, newAddr of PC to be written into register
-	assign writeData = MemtoReg ? dataMemOut_M2WB : PCS ? newAddr : ALU_Out;
-	
-	assign hlt = HALT;
+	assign writeData = MemtoReg_M2WB ? dataMemOut_M2WB : PCS_M2WB ? pcplus2_M2WB : ALU_Out_M2WB;
+		
+	assign hlt = HALT_M2WB;
 	assign pc = curAddr;
+	
 endmodule

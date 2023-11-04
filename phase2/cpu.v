@@ -132,7 +132,7 @@ module cpu(clk, rst_n, hlt, pc);
 	ALU iALU(.ALU_Out(ALU_Out), .In1(ALUin1), .In2(ALUin2), .ALUOp(ALUOp_D2EX), .Flag(Flag), .Flagin(flag_out));
 	
 	// EX/MEM Register
-	EX2M iEX2M(.MemRead(MemRead_D2EX), .MemWrite(MemRead_D2EX), .RegWrite(writeToReg_D2EX), .MemtoReg(MemtoReg_D2EX), .PCS(PCS_D2EX), .HALT(HALT_D2EX), .clk(clk), .rst_n(~rst_n), 
+	EX2M iEX2M(.MemRead(MemRead_D2EX), .MemWrite(MemWrite_D2EX), .RegWrite(writeToReg_D2EX), .MemtoReg(MemtoReg_D2EX), .PCS(PCS_D2EX), .HALT(HALT_D2EX), .clk(clk), .rst_n(~rst_n), 
 				.ALU_Out(ALU_Out), .Rt(Rt_D2EX), .Rd(Rd_D2EX), .PC_Inc(pcplus2_D2EX), .MemRead_Out(MemRead_EX2M), .MemWrite_Out(MemWrite_EX2M), .RegWrite_Out(writeToReg_EX2M), .MemtoReg_Out(MemtoReg_EX2M), 
 				.PCS_Out(PCS_EX2M), .HALT_Out(HALT_EX2M), .ALU_Out_Out(ALU_Out_EX2M), .Rt_Out(Rt_EX2M), .Rd_Out(Rd_EX2M), .PC_Inc_Out(pcplus2_EX2M), .dataRt(dataRt), .dataRt_Out(dataRt_EX2M));
 	

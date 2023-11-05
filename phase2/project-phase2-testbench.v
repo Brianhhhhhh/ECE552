@@ -141,19 +141,19 @@ module cpu_ptb();
    assign Inst = DUT.insMemory.data_out;
    //Instruction fetched in the current cycle
    
-   assign RegWrite = DUT.iControl.RegWrite;
+   assign RegWrite = DUT.iRegisterFile.WriteReg;
    // Is register file being written to in this cycle, one bit signal (1 means yes, 0 means no)
   
-   assign WriteRegister = DUT.Rd_M2WB;
+   assign WriteRegister = DUT.iRegisterFile.DstReg;
    // If above is true, this should hold the name of the register being written to. (4 bit signal)
    
-   assign WriteData = DUT.writeData;
+   assign WriteData = DUT.iRegisterFile.DstData;
    // If above is true, this should hold the Data being written to the register. (16 bits)
    
-   assign MemRead =  DUT.iControl.MemRead;
+   assign MemRead =  DUT.iEX2M.MemRead_Out;
    // Is memory being read from, in this cycle. one bit signal (1 means yes, 0 means no)
    
-   assign MemWrite = DUT.iControl.MemWrite;
+   assign MemWrite = DUT.iEX2M.MemWrite_Out;
    // Is memory being written to, in this cycle (1 bit signal)
    
    assign MemAddress = DUT.datMemory.addr;
@@ -164,7 +164,6 @@ module cpu_ptb();
    
    assign MemDataOut = DUT.datMemory.data_out;
    // If there's a memory read in this cycle, this is the data being read out of memory (16 bits)
-
 
 
    /* Add anything else you want here */

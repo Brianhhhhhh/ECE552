@@ -52,7 +52,7 @@ module memory_data (data_out, data_in, addr, enable, wr, clk, rst);
       if (rst) begin
          //load loadfile_all.img
          if (!loaded) begin
-            $readmemh("zeros.txt", mem);
+            $readmemh("dataMemory.txt", mem);
             loaded = 1;
          end
           

@@ -12,3 +12,8 @@ Note:
 2): NOP for stall: insert NOP (mux of instruction?) / clear control signals not ALUOp + Rd
 3): hlt asserted in the write back stage; Need to consider halt fetched in IF stage and branch is not taken. Thus assign pc_reg_hlt = (instr[15:12] == 4'hf && branchNotTaken); to hinder future instructions from being fetched.
 4):  Branch taken --> flush used as a selecting signal for NOP instruction and instruciton fetched
+
+
+Bugs:
+1: first RegWrite is always 1
+2: cycle count

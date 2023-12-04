@@ -3,6 +3,8 @@
 //BlockEnable is one-hot
 //WriteEnable is one on writes and zero on reads
 
+// way0 & writeEnable
+// way1 & writeEnbale
 module MetaDataArray(input clk, input rst, input [7:0] DataIn, input Write, input [127:0] BlockEnable, output [7:0] DataOut);
 	MBlock Mblk[127:0]( .clk(clk), .rst(rst), .Din(DataIn), .WriteEnable(Write), .Enable(BlockEnable), .Dout(DataOut));
 endmodule

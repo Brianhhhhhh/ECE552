@@ -1,4 +1,4 @@
-module blockEnable6to64(setBits, blockEnable);
+module blockEnable(setBits, blockEnable);
 	input [5:0] setBits;
 	output [63:0] blockEnable;
 	

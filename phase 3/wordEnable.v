@@ -1,4 +1,4 @@
-module wordEnable3to8(offset, wordEnable);
+module wordEnable(offset, wordEnable);
 	input [2:0] offset;
 	output reg [7:0] wordEnable;
 	

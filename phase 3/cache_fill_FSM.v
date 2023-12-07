@@ -40,7 +40,7 @@ module cache_fill_FSM(clk, rst_n, miss_detected, miss_address, fsm_busy, write_d
 	CLA_16bit iCLA3(.a(currO), .b(miss_address), .sub(1'b0), .sum(memory_address), .ppp(ppp), .ggg(ggg), .ovfl(ooo));
 	
 	// Assign outputs
-	assign fsm_busy = (~currS & miss_detected) | (currS & currCount != 4'h8);
+	assign fsm_busy = (~currS & miss_detected) | currS;
 	assign write_data_array = memory_data_valid & currS;																							
 	assign write_tag_array = (currCount == 4'h8) & currS;
 	assign memory_data_out = memory_data;

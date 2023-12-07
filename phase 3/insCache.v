@@ -1,5 +1,5 @@
-module insCache(clk, rst, metaIn, dataIn, blockEn, wordEn, metaWrite1, metaWrite2, dataWrite1, dataWrite2, metaOut1, metaOut2, dataOut1, dataOut2);
-	input clk, rst, metaWrite1, metaWrite2, dataWrite1, dataWrite2; 
+module insCache(clk, rst, metaIn, dataIn, blockEn, wordEn, metaWrite1, metaWrite2, dataWrite1, dataWrite2, metaOut1, metaOut2, dataOut1, dataOut2, hit);
+	input clk, rst, metaWrite1, metaWrite2, dataWrite1, dataWrite2, hit; 
 	input [7:0] metaIn;
 	input [15:0] dataIn;
 	input [63:0] blockEn;
@@ -8,9 +8,9 @@ module insCache(clk, rst, metaIn, dataIn, blockEn, wordEn, metaWrite1, metaWrite
 	output [15:0] dataOut1, dataOut2;
 	
 	// metadata array
-	MetaDataArray metaData(.clk(clk), .rst(rst), .memDataIn(), .Write1(), .Write2(), .BlockEnable1(blockEnable), .BlockEnable2(blockEnable), .DataOut1(meta1), .DataOut2(meta2));
+	MetaDataArray metaData(.clk(clk), .rst(rst), .DataIn(metaIn), .Write1(metaWrite1), .Write2(metaWrite2), .BlockEnable(blockEn), .DataOut1(metaOut1), .DataOut2(metaOut2), .hit(hit));
 	
 	// data array
-	DataArray dataArray(.clk(clk), .rst(rst), .memDataIn(dataIn), .WriteW1(dataWrite1), .WriteW2(dataWrite2), .BlockEnable(blockEn), .WordEnable(wordEn), .DataOutW1(dataOut1), .DataOutW2(dataOut2));
-
+	DataArray dataArray(.clk(clk), .rst(rst), .DataIn(dataIn), .WriteW1(dataWrite1), .WriteW2(dataWrite2), .BlockEnable(blockEn), .WordEnable(wordEn), .DataOutW1(dataOut1), .DataOutW2(dataOut2));
+		
 endmodule

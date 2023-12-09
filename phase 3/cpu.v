@@ -12,6 +12,7 @@ module cpu(clk, rst_n, hlt, pc);
 	wire wen, haltNotBranch;
 	wire [15:0] instruction;
 	wire [15:0] instruction_Stall, instruction_IF2D;
+	wire IF_ID_Wen;
 	
 	// wires in ID/EX, some of them in EX/MEM and MEM/WB
 	wire set_ctrl_zero, PC_Write, IF_ID_Write;
@@ -53,7 +54,17 @@ module cpu(clk, rst_n, hlt, pc);
 	// wires in WB
 	wire [15:0] writeData;
 	
+	// wires in cache interface
+	wire insStall, memStall, cacheStall;
 	
+	// +++++++++++++++++++++++++++++++++ Cache Interface +++++++++++++++++++++++++++++++++++++++++++
+	assign cacheStall = ~memStall;
+	cacheAccess iCA(.clk(clk), .rst(~rst_n), .memAddress(ALU_Out_EX2M), .insAddress(curAddr), .memDataIn(dataMemIn), .memDataOut(dataMemOut), .insDataOut(instruction), 
+					.memWrite(MemWrite_EX2M), .memRead(MemRead_EX2M), .insStall(insStall), .memStall(memStall));
+					
+	// +++++++++++++++++++++++++++++++++ Cache Interface +++++++++++++++++++++++++++++++++++++++++++				
+					
+					
 	
 	// ++++++++++++++++++++++++++++++++++++++++ IF/ID ++++++++++++++++++++++++++++++++++++++++++++++
 	
@@ -65,15 +76,16 @@ module cpu(clk, rst_n, hlt, pc);
 
 	// PC Register
 	assign haltNotBranch = (instruction_Stall[15:12] == 4'b1111 & BranchFinal == 1'b0);		// halt is fetched but branch is not taken in decide stage, disable PC to stop fetching more instructions
-	assign wen = ~(haltNotBranch | PC_Write);
+	assign wen = ~(haltNotBranch | PC_Write | insStall | memStall);
 	PCRegister iPCReg(.clk(clk), .rst(~rst_n), .wen(wen), .newAddr(newAddr), .curAddr(curAddr));
 	
 	// Instruction Memory
-	memory_ins insMemory(.data_out(instruction), .data_in(16'h0000), .addr(curAddr), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(~rst_n));
+	// memory_ins insMemory(.data_out(instruction), .data_in(16'h0000), .addr(curAddr), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(~rst_n));
 	
 	// IF/ID Register
-	assign instruction_Stall = (BranchFinal) ? 16'hA000 : instruction; 						// Insert NOP, but disable writeToReg later in ID/EX
-	IF2ID iIF2D(.clk(clk), .rst_n(~rst_n), .Instr(instruction_Stall), .PC_Inc(pcplus2), .Instr_Out(instruction_IF2D), .PC_Inc_Out(pcplus2_IF2D), .wen(~IF_ID_Write));
+	assign instruction_Stall = (BranchFinal | insStall) ? 16'hA000 : instruction; 						// Insert NOP, but disable writeToReg later in ID/EX
+	assign IF_ID_Wen = ~IF_ID_Write & ~memStall;
+	IF2ID iIF2D(.clk(clk), .rst_n(~rst_n), .Instr(instruction_Stall), .PC_Inc(pcplus2), .Instr_Out(instruction_IF2D), .PC_Inc_Out(pcplus2_IF2D), .wen(IF_ID_Wen));
 	
 	// ++++++++++++++++++++++++++++++++++++++++ IF/ID ++++++++++++++++++++++++++++++++++++++++++++++
 	
@@ -84,7 +96,6 @@ module cpu(clk, rst_n, hlt, pc);
 	// Hazard detection unit
 	HazardDetection iHazardD(.ID_EX_MemRead(MemRead_D2EX), .ID_EX_Rt(Rt_D2EX), .IF_ID_Rs(Rs), .IF_ID_Rt(Rt), .IF_ID_MemWrite(MemWrite), .PC_Write(PC_Write), .IF_ID_Write(IF_ID_Write), .set_ctrl_zero(set_ctrl_zero));
 
-	
 	// Decode into control signals
 	assign Opcode = instruction_IF2D[15:12];
 	assign Rd = instruction_IF2D[11:8];
@@ -115,7 +126,7 @@ module cpu(clk, rst_n, hlt, pc);
 				.RegWrite(control_line[4]), .MemtoReg(control_line[3]), .PCS(control_line[2]), .HALT(control_line[1]), .clk(clk), .rst_n(~rst_n), .Rd(Rd), .PC_Inc(pcplus2_IF2D), .ALUSrc_Out(ALUSrc_D2EX), 
 				.ALUOp_Out(ALUOp_D2EX), .readData1_Out(readData1_D2EX), .readData2_Out(readData2_D2EX), .Immediate_Out(immediate_D2EX), .Rs_Out(Rs_D2EX), .Rt_Out(Rt_D2EX), 
 				.MemRead_Out(MemRead_D2EX), .MemWrite_Out(MemWrite_D2EX), .RegWrite_Out(writeToReg_D2EX), .MemtoReg_Out(MemtoReg_D2EX), .PCS_Out(PCS_D2EX), .HALT_Out(HALT_D2EX), 
-				.Rd_Out(Rd_D2EX), .PC_Inc_Out(pcplus2_D2EX));
+				.Rd_Out(Rd_D2EX), .PC_Inc_Out(pcplus2_D2EX), .wen(cacheStall));
 	
 	// ++++++++++++++++++++++++++++++++++++++++ ID/EX +++++++++++++++++++++++++++++++++++++++++++++++
 	
@@ -139,7 +150,7 @@ module cpu(clk, rst_n, hlt, pc);
 	// EX/MEM Register
 	EX2M iEX2M(.MemRead(MemRead_D2EX), .MemWrite(MemWrite_D2EX), .RegWrite(writeToReg_D2EX), .MemtoReg(MemtoReg_D2EX), .PCS(PCS_D2EX), .HALT(HALT_D2EX), .clk(clk), .rst_n(~rst_n), 
 				.ALU_Out(ALU_Out), .Rt(Rt_D2EX), .Rd(Rd_D2EX), .PC_Inc(pcplus2_D2EX), .MemRead_Out(MemRead_EX2M), .MemWrite_Out(MemWrite_EX2M), .RegWrite_Out(writeToReg_EX2M), .MemtoReg_Out(MemtoReg_EX2M), 
-				.PCS_Out(PCS_EX2M), .HALT_Out(HALT_EX2M), .ALU_Out_Out(ALU_Out_EX2M), .Rt_Out(Rt_EX2M), .Rd_Out(Rd_EX2M), .PC_Inc_Out(pcplus2_EX2M), .dataRt(dataRt), .dataRt_Out(dataRt_EX2M));
+				.PCS_Out(PCS_EX2M), .HALT_Out(HALT_EX2M), .ALU_Out_Out(ALU_Out_EX2M), .Rt_Out(Rt_EX2M), .Rd_Out(Rd_EX2M), .PC_Inc_Out(pcplus2_EX2M), .dataRt(dataRt), .dataRt_Out(dataRt_EX2M), .wen(cacheStall));
 	
 	
 	// ++++++++++++++++++++++++++++++++++++++++ EX/MEM ++++++++++++++++++++++++++++++++++++++++++++++
@@ -149,14 +160,14 @@ module cpu(clk, rst_n, hlt, pc);
 	// ++++++++++++++++++++++++++++++++++++++++ MEM/WB ++++++++++++++++++++++++++++++++++++++++++++++
 	
 	// Data memory
-	assign enable = MemRead_EX2M | MemWrite_EX2M;
+	// assign enable = MemRead_EX2M | MemWrite_EX2M;
 	assign dataMemIn = (MtoM) ? writeData : dataRt_EX2M;	// MEM to MEM mux
-	memory_data datMemory(.data_out(dataMemOut), .data_in(dataMemIn), .addr(ALU_Out_EX2M), .enable(enable), .wr(MemWrite_EX2M), .clk(clk), .rst(~rst_n));
+	// memory_data datMemory(.data_out(dataMemOut), .data_in(dataMemIn), .addr(ALU_Out_EX2M), .enable(enable), .wr(MemWrite_EX2M), .clk(clk), .rst(~rst_n));
 	
 	// MEM/WB Register
 	M2WB iM2WB(.RegWrite(writeToReg_EX2M), .MemtoReg(MemtoReg_EX2M), .PCS(PCS_EX2M), .HALT(HALT_EX2M), .clk(clk), .rst_n(~rst_n), .ALU_Out(ALU_Out_EX2M), .DataMem(dataMemOut), .Rd(Rd_EX2M), 
 			   .PC_Inc(pcplus2_EX2M), .RegWrite_Out(writeToReg_M2WB), .MemtoReg_Out(MemtoReg_M2WB), .PCS_Out(PCS_M2WB), .HALT_Out(HALT_M2WB), .ALU_Out_Out(ALU_Out_M2WB), .DataMem_Out(dataMemOut_M2WB), 
-			   .Rd_Out(Rd_M2WB), .PC_Inc_Out(pcplus2_M2WB));
+			   .Rd_Out(Rd_M2WB), .PC_Inc_Out(pcplus2_M2WB), .wen(1'b1));
 	
 	// ++++++++++++++++++++++++++++++++++++++++ MEM/WB ++++++++++++++++++++++++++++++++++++++++++++++
 	

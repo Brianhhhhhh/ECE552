@@ -9,8 +9,8 @@ module MetaDataArray(input clk, input rst, input [7:0] DataIn, input Write1, inp
 	wire way_to_LRU = DataIn[1]; // 1 to way2, 0 to way1
 	wire [7:0] DataIn1;
 	wire [7:0] DataIn2, DataOut1_D, DataOut2_D;
-	assign DataIn1 = hit ? {DataOut1_D[7:2], ~way_to_LRU, DataOut1_D[0]} : {DataIn[7:2], DataOut1_D[1], 1'b1};
-	assign DataIn2 = hit ? {DataOut2_D[7:2], way_to_LRU, DataOut2_D[0]} : {DataIn[7:2], DataOut2_D[1], 1'b1};
+	assign DataIn1 = hit ? {DataOut1_D[7:2], way_to_LRU, DataOut1_D[0]} : {DataIn[7:2], way_to_LRU, 1'b1};
+	assign DataIn2 = hit ? {DataOut2_D[7:2], ~way_to_LRU, DataOut2_D[0]} : {DataIn[7:2], ~way_to_LRU, 1'b1};
 	wire Write_real1;
 	assign Write_real1 = hit | (~hit & Write1);
 	// hit : modify tag LRU and valid

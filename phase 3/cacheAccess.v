@@ -41,6 +41,7 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	wire [15:0] insData1, insData2;
 	wire [7:0] memWordEn_FSM2;
 	wire insTagWrite, insDataWrite;
+	wire [15:0] dataOut_FSM2, memAddress_FSM2;
 	
 	// wires in main memory
 	wire memoryEn, wr;
@@ -67,14 +68,14 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	
 	// data memory cache
 	assign dataCacheDataIn = dataCacheMiss ? dataOut_FSM1 : memDataIn;
-	assign dataCacheMetaIn = 8'h00;														// XXX
+	assign dataCacheMetaIn = {memAddress[7:2], dataCacheWay2Act, 1'b1};														// XXX
 	assign dataCacheWordEn = dataCacheMiss ? memWordEn_FSM1 : memWordEn;
 	assign dataCacheMetaWrite1 = memTagWrite & ~dataCacheWayToWrite & dataCacheMiss;
 	assign dataCacheMetaWrite2 = memTagWrite & dataCacheWayToWrite & dataCacheMiss;
 	assign dataCacheDataWrite1 = (memWrite & dataCacheWay1Act) | (memDataWrite & ~dataCacheWayToWrite & dataCacheMiss);	// hit or miss
 	assign dataCacheDataWrite2 = (memWrite & dataCacheWay2Act) | (memDataWrite & dataCacheWayToWrite & dataCacheMiss);	// hit or miss
 	
-	dataCache iDataCache(.clk(clk), .rst(rst), .metaIn(dataCacheMetaIn), .dataIn(dataCacheDataIn), .memBlockEn(memBlockEn), .wordEn(dataCacheWordEn), .metaWrite1(dataCacheMetaWrite1), 
+	dataCache iDataCache(.clk(clk), .rst(rst), .metaIn(dataCacheMetaIn), .dataIn(dataCacheDataIn), .blockEn(memBlockEn), .wordEn(dataCacheWordEn), .metaWrite1(dataCacheMetaWrite1), 
 						.metaWrite2(dataCacheMetaWrite2), .dataWrite1(dataCacheDataWrite1), .dataWrite2(dataCacheDataWrite2), .metaOut1(memMeta1), .metaOut2(memMeta2), .dataOut1(memData1), .dataOut2(memData2), 
 						.hit(~dataCacheMiss));
 	
@@ -100,13 +101,13 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	blockEnable iblockEn2(.setBits(insSet), .blockEnable(insBlockEn));
 	
 	// determine which way is activated (hit occurs)
-	assign insCacheWay1Act = insTag == insMeta1[7:2];
-	assign insCacheWay2Act = insTag == insMeta2[7:2];
+	assign insCacheWay1Act = (insTag == insMeta1[7:2]) & insMeta1[0];
+	assign insCacheWay2Act = (insTag == insMeta2[7:2]) & insMeta2[0];
 	assign insCacheWayToWrite = ~insCacheWay1Act & ~insCacheWay2Act & insMeta2[1];
 	assign insCacheMiss = ~insCacheWay1Act & ~insCacheWay2Act;
 	
 	// instruction memory cache
-	assign insCacheMetaIn = 8'h00;													// XXX
+	assign insCacheMetaIn = {insAddress[15:10], insCacheWay2Act, 1'b1};													// XXX
 	assign insCacheWordEn = insCacheMiss ? memWordEn_FSM2 : insWordEn;
 	assign insCacheMetaWrite1 = insTagWrite & ~insCacheWayToWrite & insCacheMiss;
 	assign insCacheMetaWrite2 = insTagWrite & insCacheWayToWrite & insCacheMiss;

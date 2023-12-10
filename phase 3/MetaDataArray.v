@@ -8,15 +8,19 @@
 module MetaDataArray(input clk, input rst, input [7:0] DataIn, input Write1, input Write2, input [63:0] BlockEnable, output [7:0] DataOut1, output [7:0] DataOut2, input hit);
 	wire way_to_LRU = DataIn[1]; // 1 to way2, 0 to way1
 	wire [7:0] DataIn1;
-	wire [7:0] DataIn2;
-	assign DataIn1 = hit ? {DataOut1[7:2], ~way_to_LRU, 1'b1} : {DataIn[7:2], ~way_to_LRU, 1'b1};
-	assign DataIn2 = hit ? {DataOut2[7:2], way_to_LRU, 1'b1} : {DataIn[7:2], way_to_LRU, 1'b1};
-
+	wire [7:0] DataIn2, DataOut1_D, DataOut2_D;
+	assign DataIn1 = hit ? {DataOut1_D[7:2], ~way_to_LRU, 1'b1} : {DataIn[7:2], DataOut1_D[1], 1'b1};
+	assign DataIn2 = hit ? {DataOut2_D[7:2], way_to_LRU, 1'b1} : {DataIn[7:2], DataOut2_D[1], 1'b1};
+	wire Write_real1;
+	assign Write_real1 = hit | (~hit & Write1);
 	// hit : modify tag LRU and valid
 	// miss : do nothing
 	// miss & write : modify way 0 or 1, tag
-	MBlock Mblk1[63:0]( .clk(clk), .rst(rst), .Din(DataIn1), .WriteEnable(hit | (~hit & write1)), .Enable(BlockEnable), .Dout(DataOut1));
-	MBlock Mblk2[63:0]( .clk(clk), .rst(rst), .Din(DataIn2), .WriteEnable(hit | (~hit & write2)), .Enable(BlockEnable), .Dout(DataOut2));
+	MBlock Mblk1[63:0]( .clk(clk), .rst(rst), .Din(DataIn1), .WriteEnable(hit | (~hit & Write1)), .Enable(BlockEnable), .Dout(DataOut1_D));
+	MBlock Mblk2[63:0]( .clk(clk), .rst(rst), .Din(DataIn2), .WriteEnable(hit | (~hit & Write2)), .Enable(BlockEnable), .Dout(DataOut2_D));
+	
+	assign DataOut1 = DataOut1_D;
+	assign DataOut2 = DataOut2_D;
 	
 endmodule
 
@@ -26,9 +30,11 @@ module MBlock( input clk,  input rst, input [7:0] Din, input WriteEnable, input 
 endmodule
 
 module MCell( input clk,  input rst, input Din, input WriteEnable, input Enable, output Dout);
+	/*
 	wire q;
-	assign Dout = (Enable & ~WriteEnable) ? q:q; // always = q
-	dff dffm(.q(q), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
+	assign Dout = q; // always = q
+	*/
+	dff dffm(.q(Dout), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
 endmodule
 
 // if(blk1.is_Vld == 0 && blk2.is_Vld == 0)

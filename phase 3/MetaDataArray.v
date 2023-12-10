@@ -30,9 +30,7 @@ module MBlock( input clk,  input rst, input [7:0] Din, input WriteEnable, input 
 endmodule
 
 module MCell( input clk,  input rst, input Din, input WriteEnable, input Enable, output Dout);
-	/*
 	wire q;
-	assign Dout = q; // always = q
-	*/
-	dff dffm(.q(Dout), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
+	assign Dout = Enable ? q : 'bz
+	dff dffm(.q(q), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
 endmodule

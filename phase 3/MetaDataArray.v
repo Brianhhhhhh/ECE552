@@ -9,8 +9,8 @@ module MetaDataArray(input clk, input rst, input [7:0] DataIn, input Write1, inp
 	wire way_to_LRU = DataIn[1]; // 1 to way2, 0 to way1
 	wire [7:0] DataIn1;
 	wire [7:0] DataIn2, DataOut1_D, DataOut2_D;
-	assign DataIn1 = hit ? {DataOut1_D[7:2], ~way_to_LRU, 1'b1} : {DataIn[7:2], DataOut1_D[1], 1'b1};
-	assign DataIn2 = hit ? {DataOut2_D[7:2], way_to_LRU, 1'b1} : {DataIn[7:2], DataOut2_D[1], 1'b1};
+	assign DataIn1 = hit ? {DataOut1_D[7:2], way_to_LRU, DataOut1_D[0]} : {DataIn[7:2], way_to_LRU, 1'b1};
+	assign DataIn2 = hit ? {DataOut2_D[7:2], ~way_to_LRU, DataOut2_D[0]} : {DataIn[7:2], ~way_to_LRU, 1'b1};
 	wire Write_real1;
 	assign Write_real1 = hit | (~hit & Write1);
 	// hit : modify tag LRU and valid
@@ -30,21 +30,7 @@ module MBlock( input clk,  input rst, input [7:0] Din, input WriteEnable, input 
 endmodule
 
 module MCell( input clk,  input rst, input Din, input WriteEnable, input Enable, output Dout);
-	/*
 	wire q;
-	assign Dout = q; // always = q
-	*/
-	dff dffm(.q(Dout), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
+	assign Dout = Enable ? q : 'bz;
+	dff dffm(.q(q), .d(Din), .wen(Enable & WriteEnable), .clk(clk), .rst(rst));
 endmodule
-
-// if(blk1.is_Vld == 0 && blk2.is_Vld == 0)
-// is_LRU = 1;
-// else
-// is_LRU = 0;
-
-
-// is_Vld == 1;
-// assign dataIn_Meta = {tag, is_Vld, is_LRU};
-// assign dataIn_To_Update = (tag == DataOut1[7:2]) ?	DataOut2 | 8'h01	: DataOut1 | 8'h01;
-// MetaDataArray update(.clk(clk), .rst(rst), .DataIn(dataIn_To_Update), .Write1(write1), .Write2(write2), .BlockEnable(BlockEnable), .DataOut1(don't care), .DataOut2(don't care));
-// MetaDataArray write(.clk(clk), .rst(rst), .DataIn(dataIn_Meta), .Write1(write1), .Write2(write2), .BlockEnable(BlockEnable), .DataOut1(don't care), .DataOut2(don't care));

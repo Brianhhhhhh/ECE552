@@ -61,14 +61,14 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	blockEnable iblockEn1(.setBits(memSet), .blockEnable(memBlockEn));
 	
 	// determine which way is activated (hit occurs)
-	assign dataCacheWay1Act = memTag == memMeta1[7:2];																	// tag -> [7:2]		LRU -> [1]		valid -> [0] 
-	assign dataCacheWay2Act = memTag == memMeta2[7:2];																	// Act only when HIT
+	assign dataCacheWay1Act = memTag == memMeta1[7:2] & memMeta1[0];																	// tag -> [7:2]		LRU -> [1]		valid -> [0] 
+	assign dataCacheWay2Act = memTag == memMeta2[7:2] & memMeta2[0];																	// Act only when HIT
 	assign dataCacheWayToWrite = ~dataCacheWay1Act & ~dataCacheWay2Act & memMeta2[1]; 									// if LRU of way 2 is 1, write to way 2;	cache miss;	LRU == 1
 	assign dataCacheMiss = ~dataCacheWay1Act & ~dataCacheWay2Act & dataCacheEn;
 	
 	// data memory cache
 	assign dataCacheDataIn = dataCacheMiss ? dataOut_FSM1 : memDataIn;
-	assign dataCacheMetaIn = {memAddress[7:2], dataCacheWay2Act, 1'b1};														// XXX
+	assign dataCacheMetaIn = {memAddress[15:10], dataCacheWay2Act, 1'b1};														// XXX
 	assign dataCacheWordEn = dataCacheMiss ? memWordEn_FSM1 : memWordEn;
 	assign dataCacheMetaWrite1 = memTagWrite & ~dataCacheWayToWrite & dataCacheMiss;
 	assign dataCacheMetaWrite2 = memTagWrite & dataCacheWayToWrite & dataCacheMiss;
@@ -80,8 +80,10 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 						.hit(~dataCacheMiss));
 	
 	// FSM for data memory cache
+	wire state1, memoryEn_FSM1;
 	cache_fill_FSM iFSM1(.clk(clk), .rst_n(rst), .miss_detected(dataCacheMiss), .miss_address(memAddress), .fsm_busy(memStall), .write_data_array(memDataWrite), .write_tag_array(memTagWrite), 
-						.memory_address(memAddress_FSM1), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM1), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM1));
+						.memory_address(memAddress_FSM1), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM1), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM1), .state(state1),
+						.memoryEn_FSM(memoryEn_FSM1));
 	
 	// update memDataOut
 	// cache hit: (~dataCacheMiss & dataCacheWay1Act) ? memData1 : memData2;
@@ -118,14 +120,16 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 						.dataWrite1(insCacheDataWrite1), .dataWrite2(insCacheDataWrite2), .metaOut1(insMeta1), .metaOut2(insMeta2), .dataOut1(insData1), .dataOut2(insData2), .hit(~insCacheMiss));
 	
 	// FSM for instruction memory cache
+	wire state2, memoryEn_FSM2;
 	cache_fill_FSM iFSM2(.clk(clk), .rst_n(rst), .miss_detected(insCacheMiss), .miss_address(insAddress), .fsm_busy(insStall), .write_data_array(insDataWrite), .write_tag_array(insTagWrite), 
-						.memory_address(memAddress_FSM2), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM2), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM2));
+						.memory_address(memAddress_FSM2), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM2), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM2), .state(state2),
+						.memoryEn_FSM(memoryEn_FSM2));
 	
 	assign insDataOut = (~insCacheMiss) ? (insCacheWay1Act) ? insData1 : insData2 : {16{1'bz}};
 	
 	
 	// +++++++++++++++++++++++++ Main Memory ++++++++++++++++++++++++++++ //
-	assign memoryEn = insCacheMiss | dataCacheMiss | memWrite;
+	assign memoryEn = (insCacheMiss | dataCacheMiss | memWrite) & ( (memoryEn_FSM2 & state2) | (memoryEn_FSM1 & state1));
 	assign memoryAddr = (insCacheMiss) ? memAddress_FSM2 : (dataCacheMiss) ? memAddress_FSM1 : memAddress;
 	assign wr = memWrite & (~dataCacheMiss);
 	memory4c mainMemory(.data_out(dataOut_Memory), .data_in(memDataIn), .addr(memoryAddr), .enable(memoryEn), .wr(wr), .clk(clk), .rst(rst), .data_valid(dataValid));

@@ -49,7 +49,7 @@ module cpu(clk, rst_n, hlt, pc);
 	
 	// wires in MEM/WB
 	wire [15:0] dataMemOut, dataMemIn, dataMemOut_M2WB;
-	wire enable;
+	// wire enable;
 	
 	// wires in WB
 	wire [15:0] writeData;

@@ -103,7 +103,7 @@ module cpu(clk, rst_n, hlt, pc);
 	assign tempoRs = instruction_IF2D[7:4];
 	assign BranchCCC = instruction_IF2D[11:9];
 	assign Rs = (readReg) ? Rd : tempoRs;
-	assign Rt = (SW) ? Rd : tempoRt;
+	assign Rt = (SW | MemRead) ? Rd : tempoRt; // set lw rt = rd (for correction of hazard detection)
 	control iControl(.opCode(Opcode), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .RegWrite(writeToReg), .HALT(HALT), .PCS(PCS), .readReg(readReg), .SW(SW));
 	
 	// New address of PC

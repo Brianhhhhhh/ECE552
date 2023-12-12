@@ -77,7 +77,7 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	
 	dataCache iDataCache(.clk(clk), .rst(rst), .metaIn(dataCacheMetaIn), .dataIn(dataCacheDataIn), .blockEn(memBlockEn), .wordEn(dataCacheWordEn), .metaWrite1(dataCacheMetaWrite1), 
 						.metaWrite2(dataCacheMetaWrite2), .dataWrite1(dataCacheDataWrite1), .dataWrite2(dataCacheDataWrite2), .metaOut1(memMeta1), .metaOut2(memMeta2), .dataOut1(memData1), .dataOut2(memData2), 
-						.hit(~dataCacheMiss));
+						.hit(~dataCacheMiss & dataCacheEn));
 	
 	// FSM for data memory cache
 	wire state1, memoryEn_FSM1;

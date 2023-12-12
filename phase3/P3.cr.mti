@@ -68,6 +68,13 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	CLA_logic
 
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module cacheAccess
+
+Top level modules:
+	cacheAccess
+
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module SRA

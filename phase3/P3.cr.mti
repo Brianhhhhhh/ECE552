@@ -5,19 +5,19 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	memory4c
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module memory_data
-
-Top level modules:
-	memory_data
-
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module WriteDecoder_4_16
 
 Top level modules:
 	WriteDecoder_4_16
+
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module memory_data
+
+Top level modules:
+	memory_data
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -61,12 +61,12 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	ALU
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/D2EX.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/D2EX.v
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module D2EX
+-- Compiling module wordEnable
 
 Top level modules:
-	D2EX
+	wordEnable
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Forwarding.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Forwarding.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -75,12 +75,12 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	Forwarding
 
-} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/D2EX.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/D2EX.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module wordEnable
+-- Compiling module D2EX
 
 Top level modules:
-	wordEnable
+	D2EX
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cpu.v {2 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cpu.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -154,6 +154,13 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 Top level modules:
 	RegisterFile
 
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module cacheAccess
+
+Top level modules:
+	cacheAccess
+
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/dataCache.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/dataCache.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling module dataCache
@@ -174,13 +181,6 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 
 Top level modules:
 	SRA
-
-} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module cacheAccess
-
-Top level modules:
-	cacheAccess
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -242,6 +242,13 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 
 Top level modules:
 	HazardDetection
+
+} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module RED
+
+Top level modules:
+	RED
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/decode.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/decode.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
@@ -305,13 +312,6 @@ Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
 
 Top level modules:
 	FinalAddr
-
-} {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v
-Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
--- Compiling module cpu_ptb
-
-Top level modules:
-	cpu_ptb
 
 } {} {}} C:/Users/Tzq17/Desktop/552_P2/Project/phase3/insCache.v {1 {vlog -work work -stats=none C:/Users/Tzq17/Desktop/552_P2/Project/phase3/insCache.v
 Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015

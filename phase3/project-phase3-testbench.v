@@ -56,8 +56,8 @@ module cpu_ptb();
       DCacheReq_count = 0;
       ICacheReq_count = 0;
 
-      trace_file = $fopen("verilogsim2.ptrace");
-      sim_log_file = $fopen("verilogsim2.plog");
+      trace_file = $fopen("verilogsim4.ptrace");
+      sim_log_file = $fopen("verilogsim4.plog");
       
    end
 
@@ -199,16 +199,16 @@ module cpu_ptb();
    assign MemDataOut = DUT.dataMemOut;
    // If there's a memory read in this cycle, this is the data being read out of memory (16 bits)
 
-   assign ICacheReq = DUT.wen;
+   assign ICacheReq = ~DUT.hlt; 
    // Signal indicating a valid instruction read request to cache
    
-   assign ICacheHit = ~DUT.insStall;
+   assign ICacheHit = ~DUT.iCA.insCacheMiss;
    // Signal indicating a valid instruction cache hit
 
    assign DCacheReq = DUT.MemWrite_EX2M | DUT.MemRead_EX2M;
    // Signal indicating a valid instruction data read or write request to cache
    
-   assign DCacheHit = ~DUT.memStall;
+   assign DCacheHit = ~DUT.iCA.dataCacheMiss & DUT.iCA.dataCacheEn;
    // Signal indicating a valid data cache hit
 
 

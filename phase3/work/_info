@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/altera/16.0
 vALU
-Z0 !s110 1702423044
+Z0 !s110 1702700504
 !i10b 1
 !s100 d?54`E7KElmJX8IN<P1O]3
 I97iIPLD5IZ9C^81<8R2iT1
@@ -23,7 +23,7 @@ Z4 OV;L;10.4d;61
 r1
 !s85 0
 31
-Z5 !s108 1702423044.000000
+Z5 !s108 1702700504.000000
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ALU.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ALU.v|
 !i113 1
@@ -51,7 +51,7 @@ R5
 R6
 n@bit@cell
 vBlock
-Z7 !s110 1702423045
+Z7 !s110 1702700505
 !i10b 1
 !s100 Z7@DfnW8efZ75:3NNUYR>0
 IIa27:?WEQbUc<lCz<N6L^3
@@ -65,7 +65,7 @@ R4
 r1
 !s85 0
 31
-Z10 !s108 1702423045.000000
+Z10 !s108 1702700505.000000
 Z11 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/DataArray.v|
 Z12 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/DataArray.v|
 !i113 1
@@ -92,6 +92,27 @@ R5
 !i113 1
 R6
 nblock@enable
+vbranchForwarding
+Z13 !s110 1702700507
+!i10b 1
+!s100 IKhD2cR=ciMR?bz9^[Vh00
+I59M`0R??WWkTCf56k_TPT0
+R1
+R2
+w1702699711
+8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/branchForwarding.v
+FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/branchForwarding.v
+L0 1
+R4
+r1
+!s85 0
+31
+Z14 !s108 1702700507.000000
+!s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/branchForwarding.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/branchForwarding.v|
+!i113 1
+R6
+nbranch@forwarding
 vBranchMux
 R7
 !i10b 1
@@ -137,11 +158,11 @@ ncache_fill_@f@s@m
 vcacheAccess
 R7
 !i10b 1
-!s100 WOkjC?YH=K<M6g]K7cnW;3
-IdgVOU1B[9;1?]<PFo6Wee1
+!s100 GncoCmJUlUCMZ?>3=IcET3
+IKRJBQS5:_`j[kV4BAUOkn3
 R1
 R2
-w1702339228
+w1702694847
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/cacheAccess.v
 L0 1
@@ -262,11 +283,11 @@ ncontrol_@a@l@u@op
 vcpu
 R7
 !i10b 1
-!s100 bK8GYmTlSPPkd3292Hb^B1
-I_10;@T@FVFFV`g`L><7Fm2
+!s100 fk`fTL_?Q<dXcVDoa]Ejb1
+I22QYmSL49[OV0gnfAT;D92
 R1
 R2
-w1702422935
+w1702700492
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/cpu.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/cpu.v
 L0 1
@@ -280,13 +301,13 @@ R10
 !i113 1
 R6
 vcpu_ptb
-Z13 !s110 1702423046
+!s110 1702701603
 !i10b 1
-!s100 6ABSd`IEf>;fC32XNDB<J1
-ID6]KXSlH_TXL77IiiKR:H1
+!s100 V3JY24ID;O>LbEcC^a2k^1
+IC[bB[faVoc[gI5IkhcofZ2
 R1
 R2
-Z14 w1702249800
+w1702701578
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v
 L0 1
@@ -294,7 +315,7 @@ R4
 r1
 !s85 0
 31
-Z15 !s108 1702423046.000000
+!s108 1702701603.000000
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/project-phase3-testbench.v|
 !i113 1
@@ -372,7 +393,7 @@ R2
 R3
 R8
 R9
-Z16 L0 31
+Z15 L0 31
 R4
 r1
 !s85 0
@@ -570,7 +591,7 @@ R10
 R6
 n@hazard@detection
 vIF2ID
-R13
+Z16 !s110 1702700506
 !i10b 1
 !s100 0FlfP7VjWJbz[abY5WfS>3
 I2;>8RLcejfboPB:[^;9R13
@@ -584,14 +605,14 @@ R4
 r1
 !s85 0
 31
-R15
+Z17 !s108 1702700506.000000
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/IF2ID.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/IF2ID.v|
 !i113 1
 R6
 n@i@f2@i@d
 vinsCache
-R13
+R16
 !i10b 1
 !s100 K>7^LhZ0bez[_7@iFe8aA0
 IS@gfYf53?8RdLGCiU=8Sm2
@@ -605,14 +626,14 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/insCache.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/insCache.v|
 !i113 1
 R6
 nins@cache
 vLB
-R13
+R16
 !i10b 1
 !s100 UQYAlamSQNF_h<9L0]SJ92
 II75jO`KC4<f4oCY8;>3M^3
@@ -626,14 +647,14 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/LB.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/LB.v|
 !i113 1
 R6
 n@l@b
 vM2WB
-R13
+R16
 !i10b 1
 !s100 Y2VSlZGbCiVT@6f4[8KX71
 IO8[z2j2PNRBSP:LMSOHEP1
@@ -647,62 +668,62 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/M2WB.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/M2WB.v|
 !i113 1
 R6
 n@m2@w@b
 vMBlock
-R13
+R16
 !i10b 1
 !s100 @>2>jScJXNgnk5b2S7T?D0
 IY7SkS7m0QbShhG0Eghf^h3
 R1
 R2
-R14
-Z17 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v
-Z18 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v
+Z18 w1702249800
+Z19 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v
+Z20 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v
 L0 28
 R4
 r1
 !s85 0
 31
-R15
-Z19 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v|
-Z20 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v|
+R17
+Z21 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v|
+Z22 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/MetaDataArray.v|
 !i113 1
 R6
 n@m@block
 vMCell
-R13
+R16
 !i10b 1
 !s100 2[Xf=440J8^Tj@;dDJDFa0
 Ia5NNam0K4Q_BXZ;GLf>d<0
 R1
 R2
-R14
-R17
 R18
+R19
+R20
 L0 32
 R4
 r1
 !s85 0
 31
-R15
-R19
-R20
+R17
+R21
+R22
 !i113 1
 R6
 n@m@cell
 vmemory4c
-R13
+R16
 !i10b 1
 !s100 CTH<a]O^KoIECEoX8K_>60
 IA4NNC7`:BR;KFWABXDO1L0
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/multicycle_memory.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/multicycle_memory.v
 L0 24
@@ -710,13 +731,13 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/multicycle_memory.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/multicycle_memory.v|
 !i113 1
 R6
 vmemory_data
-R13
+R16
 !i10b 1
 !s100 Ez^RDUbfUYZFTacZImk4a2
 Il[_KbI59Ajzi;<`SD@kWT3
@@ -725,65 +746,65 @@ R2
 R3
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v
-R16
+R15
 R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_data.v|
 !i113 1
 R6
 vmemory_ins
-R13
+R16
 !i10b 1
 !s100 <_No2gh46hRlP]WbeV[dK2
 I:z[aYK6?BCnW4>RSUD:DI1
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_ins.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_ins.v
-R16
+R15
 R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_ins.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/memory_ins.v|
 !i113 1
 R6
 vMetaDataArray
-R13
+R16
 !i10b 1
 !s100 T0K4_514Oc73EN36QJL2B0
 I]FWb6lc2?nXmaPFAb@3?M3
 R1
 R2
-R14
-R17
 R18
+R19
+R20
 L0 8
 R4
 r1
 !s85 0
 31
-R15
-R19
-R20
+R17
+R21
+R22
 !i113 1
 R6
 n@meta@data@array
 vPADDSB
-R13
+R16
 !i10b 1
 !s100 <197feOnPL?m6m<Wa0`7D0
 IC`[XlmJRYHW^ZEIAaA5Fg1
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PADDSB.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/PADDSB.v
 L0 1
@@ -791,20 +812,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PADDSB.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PADDSB.v|
 !i113 1
 R6
 n@p@a@d@d@s@b
 vPCRegister
-R13
+R16
 !i10b 1
 !s100 ][i2l^n]VUk`U9@g6YRW:1
 ILL:F3>E66MaGgcBz]=N>D2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PCRegister.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/PCRegister.v
 L0 1
@@ -812,20 +833,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PCRegister.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PCRegister.v|
 !i113 1
 R6
 n@p@c@register
 vPFA_1bit
-R13
+R16
 !i10b 1
 !s100 =mAPGmBLOdEWK8MfP43e`2
 I=049:A_YJjReG]f@>R_8F2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PFA_1bit.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/PFA_1bit.v
 L0 1
@@ -833,20 +854,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PFA_1bit.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/PFA_1bit.v|
 !i113 1
 R6
 n@p@f@a_1bit
 vReadDecoder_4_16
-R13
+R16
 !i10b 1
 !s100 _HBeQNb>b?WF5]M1_h5T00
 I1`7eIki9_f_MgJi`_J=ML2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ReadDecoder_4_16.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/ReadDecoder_4_16.v
 L0 1
@@ -854,20 +875,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ReadDecoder_4_16.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ReadDecoder_4_16.v|
 !i113 1
 R6
 n@read@decoder_4_16
 vRED
-R13
+R16
 !i10b 1
 !s100 N4eN_XTz5cniU7S[=gjP33
 I6XdBG[O7;]=DF5I6O?z8[2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v
 L0 1
@@ -875,20 +896,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RED.v|
 !i113 1
 R6
 n@r@e@d
 vRegister
-R13
+R16
 !i10b 1
 !s100 cdT>QkFjGCjm[bW?CER@81
 IVc262h5aSbm?Q:>JINoea3
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Register.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/Register.v
 L0 1
@@ -896,20 +917,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Register.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Register.v|
 !i113 1
 R6
 n@register
 vRegisterFile
-R13
+R16
 !i10b 1
 !s100 @Bmn68N;VKMI3WQM2f82;1
 Ibk0z;dMO6M?]j`:m<5><n2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RegisterFile.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/RegisterFile.v
 L0 1
@@ -917,20 +938,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RegisterFile.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/RegisterFile.v|
 !i113 1
 R6
 n@register@file
 vROR
-R13
+R16
 !i10b 1
 !s100 jiX^CGEDZ^:MX:QZ=7d3c2
 IeF]^ISF>k79>7U=6TAN_F3
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ROR.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/ROR.v
 L0 1
@@ -938,20 +959,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ROR.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/ROR.v|
 !i113 1
 R6
 n@r@o@r
 vSign_extend
-R13
+R16
 !i10b 1
 !s100 GHOZL5PNU^lK_2Efizoc52
 I;XkIbCLdD4bWC1O62jdP43
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Sign_extend.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/Sign_extend.v
 L0 1
@@ -959,20 +980,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Sign_extend.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/Sign_extend.v|
 !i113 1
 R6
 n@sign_extend
 vSLL
-R13
+R16
 !i10b 1
 !s100 _mRYRY:loTj8>K<h<ohVP0
 I>AJ<DLMmL0oaemIDbz1Kl2
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v
 L0 1
@@ -980,20 +1001,20 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SLL.v|
 !i113 1
 R6
 n@s@l@l
 vSRA
-R13
+R16
 !i10b 1
 !s100 ]3TKjeAU<T6ZC?L6N08RN0
 IWLF?Od@:SQQfzB<AVTFXS1
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v
 L0 1
@@ -1001,7 +1022,7 @@ R4
 r1
 !s85 0
 31
-R15
+R17
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/SRA.v|
 !i113 1
@@ -1029,13 +1050,13 @@ R5
 R6
 ntb_block@enable6to64
 vwordEnable
-Z21 !s110 1702423047
+R13
 !i10b 1
 !s100 g2PJY_W>TC<>X:XI;Q0mf3
 I9c7b0iI<KJeMWQ?=VlRiz1
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v
 L0 1
@@ -1043,20 +1064,20 @@ R4
 r1
 !s85 0
 31
-R15
+R14
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/wordEnable.v|
 !i113 1
 R6
 nword@enable
 vWriteDecoder_4_16
-R21
+R13
 !i10b 1
 !s100 cQ@o_mC>n4F_Mi99ni?N?0
 IAbif?BjBDclcDc5[QERzl3
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v
 L0 1
@@ -1064,7 +1085,7 @@ R4
 r1
 !s85 0
 31
-!s108 1702423047.000000
+R14
 !s107 C:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Tzq17/Desktop/552_P2/Project/phase3/WriteDecoder_4_16.v|
 !i113 1
@@ -1077,7 +1098,7 @@ R0
 INk8Y8;S_EUl;gBYoLPE:K0
 R1
 R2
-R14
+R18
 8C:/Users/Tzq17/Desktop/552_P2/Project/phase3/XOR.v
 FC:/Users/Tzq17/Desktop/552_P2/Project/phase3/XOR.v
 L0 1

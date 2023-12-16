@@ -106,9 +106,16 @@ module cpu(clk, rst_n, hlt, pc);
 	assign Rt = (SW | MemRead) ? Rd : tempoRt; // set lw rt = rd (for correction of hazard detection)
 	control iControl(.opCode(Opcode), .ALUOp(ALUOp), .Branch(Branch), .BranchReg(BranchReg), .MemRead(MemRead), .MemtoReg(MemtoReg), .MemWrite(MemWrite), .ALUSrc(ALUSrc), .RegWrite(writeToReg), .HALT(HALT), .PCS(PCS), .readReg(readReg), .SW(SW));
 	
+	
+	// Branch forwarding
+	wire bForward;
+	wire [2:0]FlagFinal;
+	branchForwarding ibForwarding(.aluOpcode(ALUOp_D2EX), .branch(Branch), .forwarding(bForward));
+	assign FlagFinal = bForward ? Flag : flag_out;
+	
 	// New address of PC
 	CLA_16bit branchadder2(.a(pcplus2_IF2D), .b(immediate << 1), .sum(targetaddr), .sub(1'b0), .ppp(pp), .ggg(gg), .ovfl(ov)); 	// target address of branch
-	BranchMux iBranchMux(.branch(Branch), .ccc(BranchCCC), .Flag(flag_out), .branch_out(BranchFinal));
+	BranchMux iBranchMux(.branch(Branch), .ccc(BranchCCC), .Flag(FlagFinal), .branch_out(BranchFinal));
 	assign newAddr_D2EX = BranchFinal ? (BranchReg ? readData1 : targetaddr) : pcplus2_IF2D;	// newAddr_D2EX will be passed to PC in IF/ID
 	
 	// Register file
@@ -167,7 +174,7 @@ module cpu(clk, rst_n, hlt, pc);
 	// MEM/WB Register
 	M2WB iM2WB(.RegWrite(writeToReg_EX2M), .MemtoReg(MemtoReg_EX2M), .PCS(PCS_EX2M), .HALT(HALT_EX2M), .clk(clk), .rst_n(~rst_n), .ALU_Out(ALU_Out_EX2M), .DataMem(dataMemOut), .Rd(Rd_EX2M), 
 			   .PC_Inc(pcplus2_EX2M), .RegWrite_Out(writeToReg_M2WB), .MemtoReg_Out(MemtoReg_M2WB), .PCS_Out(PCS_M2WB), .HALT_Out(HALT_M2WB), .ALU_Out_Out(ALU_Out_M2WB), .DataMem_Out(dataMemOut_M2WB), 
-			   .Rd_Out(Rd_M2WB), .PC_Inc_Out(pcplus2_M2WB), .wen(1'b1));
+			   .Rd_Out(Rd_M2WB), .PC_Inc_Out(pcplus2_M2WB), .wen(cacheStall));
 	
 	// ++++++++++++++++++++++++++++++++++++++++ MEM/WB ++++++++++++++++++++++++++++++++++++++++++++++
 	

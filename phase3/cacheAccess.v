@@ -26,6 +26,9 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	wire [15:0] dataCacheDataIn;
 	wire [7:0] dataCacheWordEn;
 	wire dataCacheMetaWrite1, dataCacheMetaWrite2, dataCacheDataWrite1, dataCacheDataWrite2;
+	wire state1, memoryEn_FSM1;
+	wire FSMen1;
+	wire FSM_busy1;
 	
 	// wires in instruction memory cache
 	wire [5:0] insTag, insSet;
@@ -42,6 +45,8 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	wire [7:0] memWordEn_FSM2;
 	wire insTagWrite, insDataWrite;
 	wire [15:0] dataOut_FSM2, memAddress_FSM2;
+	wire FSMen2;
+	wire state2, memoryEn_FSM2;
 	
 	// wires in main memory
 	wire memoryEn, wr;
@@ -80,11 +85,11 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 						.hit(~dataCacheMiss & dataCacheEn));
 	
 	// FSM for data memory cache
-	wire state1, memoryEn_FSM1;
-	cache_fill_FSM iFSM1(.clk(clk), .rst_n(rst), .miss_detected(dataCacheMiss), .miss_address(memAddress), .fsm_busy(memStall), .write_data_array(memDataWrite), .write_tag_array(memTagWrite), 
+	assign FSMen1 = dataCacheMiss & (~state2);
+	cache_fill_FSM iFSM1(.clk(clk), .rst_n(rst), .miss_detected(FSMen1), .miss_address(memAddress), .fsm_busy(FSM_busy1), .write_data_array(memDataWrite), .write_tag_array(memTagWrite), 
 						.memory_address(memAddress_FSM1), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM1), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM1), .state(state1),
 						.memoryEn_FSM(memoryEn_FSM1));
-	
+	assign memStall = FSM_busy1 | dataCacheMiss;
 	// update memDataOut
 	// cache hit: (~dataCacheMiss & dataCacheWay1Act) ? memData1 : memData2;
 	// cache miss: high impedence
@@ -92,6 +97,8 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	
 	
 	// +++++++++++++++++++++++ Instruction Memory Cache ++++++++++++++++++++++++++++ //
+	
+	//assign memoryBusy = 
 	
 	// tag, set, offset bits of requested instruction memory address
 	assign insTag = insAddress[15:10];
@@ -116,12 +123,13 @@ module cacheAccess(clk, rst, memAddress, insAddress, memDataIn, memDataOut, insD
 	assign insCacheDataWrite1 = insDataWrite & ~insCacheWayToWrite & insCacheMiss;
 	assign insCacheDataWrite2 = insDataWrite & insCacheWayToWrite & insCacheMiss;
 	
+	
 	insCache iInsCache(.clk(clk), .rst(rst), .metaIn(insCacheMetaIn), .dataIn(dataOut_FSM2), .blockEn(insBlockEn), .wordEn(insCacheWordEn), .metaWrite1(insCacheMetaWrite1), .metaWrite2(insCacheMetaWrite2), 
 						.dataWrite1(insCacheDataWrite1), .dataWrite2(insCacheDataWrite2), .metaOut1(insMeta1), .metaOut2(insMeta2), .dataOut1(insData1), .dataOut2(insData2), .hit(~insCacheMiss));
 	
 	// FSM for instruction memory cache
-	wire state2, memoryEn_FSM2;
-	cache_fill_FSM iFSM2(.clk(clk), .rst_n(rst), .miss_detected(insCacheMiss), .miss_address(insAddress), .fsm_busy(insStall), .write_data_array(insDataWrite), .write_tag_array(insTagWrite), 
+	assign FSMen2 = insCacheMiss & (~state1);
+	cache_fill_FSM iFSM2(.clk(clk), .rst_n(rst), .miss_detected(FSMen2), .miss_address(insAddress), .fsm_busy(insStall), .write_data_array(insDataWrite), .write_tag_array(insTagWrite), 
 						.memory_address(memAddress_FSM2), .memory_data(dataOut_Memory), .memory_data_out(dataOut_FSM2), .memory_data_valid(dataValid), .wordEn(memWordEn_FSM2), .state(state2),
 						.memoryEn_FSM(memoryEn_FSM2));
 	
